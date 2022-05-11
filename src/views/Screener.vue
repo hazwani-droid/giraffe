@@ -180,6 +180,13 @@
             text
             @click="dialog = false"
           >
+            Close
+          </v-btn>
+          <v-btn
+            color="primary text-none"
+            text
+            @click="dialog = false"
+          >
             Filter
           </v-btn>
         </v-card-actions>
