@@ -11,24 +11,24 @@ const routes = [
         component: Home
     },
     {
-        path: '/category',
-        name: 'Category',
-        component: () => import("@/views/Category.vue"),
+        path: '/News',
+        name: 'News',
+        component: () => import("@/views/News.vue"),
     },
     {
-        path: '/detail',
-        name: 'Detail',
-        component: () => import("@/views/Detail.vue"),
+        path: '/Screener',
+        name: 'Screener',
+        component: () => import("@/views/Screener.vue"),
     },
     {
-        path: '/authors',
-        name: 'Authors',
-        component: () => import("@/views/Authors.vue"),
-    },
-    {
-        path: '/login',
+        path: '/Login',
         name: 'Login',
         component: () => import("@/views/Login.vue"),
+    },
+    {
+        path: '/Update',
+        name: 'Update',
+        component: () => import("@/views/Update.vue"),
     }
 ]
 

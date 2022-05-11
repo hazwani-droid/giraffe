@@ -59,9 +59,9 @@
                 style="cursor: pointer"
                 @click="$router.push('/')"
             >
-              <v-icon color="primary" large>mdi-feather</v-icon>
-              Hero
-              <span class="accent--text">UI</span>
+              <v-icon color="#0000FF" large>mdi-feather</v-icon>
+              StockNeo
+              
             </v-toolbar-title>
           </v-col>
 
@@ -119,20 +119,20 @@ export default {
         to: "/",
       },
       {
-        title: "Category",
-        to: "/category",
+        title: "News",
+        to: "/News",
       },
       {
-        title: "Detail",
-        to: "/detail",
-      },
-      {
-        title: "Authors",
-        to: "/authors",
+        title: "Graph Screener",
+        to: "/screener",
       },
       {
         title: "Login",
-        to: "/login",
+        to: "/Login",
+      },
+      {
+        title: "Update Company",
+        to: "/Update",
       },
     ],
   }),
