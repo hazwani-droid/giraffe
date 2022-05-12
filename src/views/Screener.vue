@@ -37,9 +37,8 @@
                     <v-card>
                       <v-card-title class="text-h5 grey lighten-2">
                         Filters
-                          
                       </v-card-title>
-                   
+
                       <v-divider></v-divider>
 
                       <v-card-text>
@@ -140,6 +139,7 @@
                             <v-select
                               v-model="sector"
                               :items="sectors"
+                              v-on:change="sectorRe"
                               label="Choose a sector to view the relationships"
                               dense
                             ></v-select>
@@ -151,6 +151,7 @@
                             <v-select
                               v-model="industry"
                               :items="industries"
+                              v-on:change="industryRe"
                               label="Choose an industry to view the relationships"
                               dense
                             ></v-select>
@@ -160,41 +161,51 @@
                         <v-row>
                           <v-col>
                             <v-select
-                              v-model="compRe"
-                              v-on:input="limiter"
-                              :items="compRelation"
-                              :menu-props="{ maxHeight: '400' }"
-                              persistent-hint
-                              label="Choose two companies to view the relationship"
-                              multiple
-                              chips
+                              v-model="director"
+                              :items="directors"
+                              v-on:change="directorRe"
+                              label="Choose a director to view the relationships"
                               dense
                             ></v-select>
                           </v-col>
                         </v-row>
+
+                        <v-row>
+                          <v-col>
+                            <v-select
+                              v-model="compRe"
+                              v-on:change="comAllRelation"
+                              :items="compRelation"
+                              :menu-props="{ maxHeight: '400' }"
+                              persistent-hint
+                              label="Choose companies to view their relationships"
+                              multiple
+                              chips
+                              dense
+                            ></v-select>
+                            <!-- <v-checkbox
+                              v-model="compRebox"
+                              label="Only show related relationships"
+                              color="#0000FF"
+                              @change="check(comOnlyRelation)"
+                              hide-details
+                            ></v-checkbox> -->
+                          </v-col>
+                        </v-row>
                       </v-card-text>
-                 <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary text-none"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="primary text-none"
-            text
-            @click="dialog = false"
-          >
-            Filter
-          </v-btn>
-        </v-card-actions>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="primary text-none"
+                          text
+                          @click="dialog = false"
+                        >
+                          Close
+                        </v-btn>
+                      </v-card-actions>
                     </v-card>
                   </v-dialog>
                 </div>
-
-             
 
                 <v-divider class="my-4"></v-divider>
                 <script
@@ -228,7 +239,7 @@ export default {
     search: "",
     selected: true,
     dialog: false,
-    
+
     minPrice: -50,
     maxPrice: 90,
     rangePrice: [-20, 70],
@@ -236,10 +247,31 @@ export default {
     maxCap: 90,
     rangeCap: [-20, 70],
     compRe: [],
+    comp1: "",
+    comp2: "",
     sector: "",
     industry: "",
     peratio: "",
     employee: "",
+    director: "",
+    directors: [
+      "Pui Hold Ho",
+      "Yew Khid Wong",
+      "Khai Shyuan Kua",
+      "Yew Kee Roy Ho",
+      "Ng Kok Heng",
+      "Siew Wei Mak",
+      "Lee Aun Choong",
+      "Ming Chang Lim",
+      "Soo Chye Yu",
+      "Woon Chet Chai",
+      "Huei Ping Chen",
+      "Chow Huat Pang",
+      "Chor How Tan",
+      "Wai Keong Hoo",
+      "Guo Hua Zhuang",
+      "Sik Eek Tan",
+    ],
     compRelation: [
       "Xidelang Holdings LTD",
       "Seacera Group Berhad",
@@ -339,12 +371,12 @@ export default {
   }),
 
   methods: {
-    limiter(e) {
-      if (e.length > 2) {
-        console.log(" you can only select two", e);
-        e.pop();
-      }
-    },
+    // limiter(e) {
+    //   if (e.length > 2) {
+    //     console.log(" you can only select two", e);
+    //     e.pop();
+    //   }
+    // },
     CompanyOversea() {
       console.log(this.search);
       var config = {
@@ -373,7 +405,23 @@ export default {
             caption: "stockPrice",
           },
         },
-        relationships: {},
+        relationships: {
+          DIRECTED_BY: {
+            thickness: "count",
+          },
+          INDUSTRALIZE_IN: {
+            thickness: "count",
+          },
+          STOCKPRICE_OF: {
+            thickness: "count",
+          },
+          SECTORED_IN: {
+            thickness: "count",
+          },
+          MARKETCAP_IS: {
+            thickness: "count",
+          },
+        },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company {name: '" +
@@ -383,6 +431,210 @@ export default {
 
       var viz = new NeoVis.default(config);
       viz.render();
+    },
+    directorRe() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          DIRECTED_BY: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(Company {director: '" +
+          this.director +
+          "'})-[r:DIRECTED_BY]->() RETURN p ",
+      };
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    sectorRe() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          SECTORED_IN: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(Company {sector: '" +
+          this.sector +
+          "'})-[r:SECTORED_IN]->() RETURN p  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    industryRe() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          INDUSTRALIZE_IN: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(Company {industry: '" +
+          this.industry +
+          "'})-[r:INDUSTRALIZE_IN]->() RETURN p  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+
+    comAllRelation() {
+      this.comp1 = this.compRe[0];
+      this.comp2 = this.compRe[1];
+      this.comp3 = this.compRe[2];
+      this.comp4 = this.compRe[3];
+      this.comp5 = this.compRe[4];
+      this.comp6 = this.compRe[5];
+
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          DIRECTED_BY: {
+            thickness: "count",
+          },
+          INDUSTRALIZE_IN: {
+            thickness: "count",
+          },
+          STOCKPRICE_OF: {
+            thickness: "count",
+          },
+          SECTORED_IN: {
+            thickness: "count",
+          },
+          MARKETCAP_IS: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r]->(b) WHERE a.name IN ['" +
+          this.comp1 +
+          "','" +
+          this.comp2 +
+          "','" +
+          this.comp3 +
+          "','" +
+          this.comp4 +
+          "','" +
+          this.comp5 +
+          "','" +
+          this.comp6 +
+          "'] RETURN a,r,b",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+    relation() {
+      if ((this.compRebox = true)) {
+        return this.comOnlyRelation();
+      } else if ((this.compRebox = false)) {
+        return this.comAllRelation();
+      } else {
+        console.log("no purpose");
+      }
     },
   },
   components: {
@@ -395,5 +647,6 @@ export default {
   width: 700px;
   height: 600px;
   margin-left: 200px;
+  text-transform: lowercase;
 }
 </style>
