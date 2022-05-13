@@ -6,7 +6,8 @@
           <div>
             <v-card flat color="transparent">
               <v-card-text>
-                <div>
+                
+                <div class="searchbar">
                   <v-text-field
                     class="mx-4 searchbar"
                     flat
@@ -18,38 +19,35 @@
                     clearable
                   ></v-text-field>
                 </div>
-                <div class="text-center">
-                  <v-dialog v-model="dialog" persistent width="500">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-col class="text-right">
-                        <v-btn
-                          color="primary text-capitalize"
-                          dark
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon>mdi-filter</v-icon>
-                          Filter
-                        </v-btn>
-                      </v-col>
-                    </template>
-
-                    <v-card>
-                      <v-card-title class="text-h5 grey lighten-2">
+               
+                <v-navigation-drawer
+                  v-model="drawer"
+                  app
+                  permanent
+                  clipped
+                  width="350px"
+                >
+                  <!-- <v-app-bar-nav-icon  >Filters</v-app-bar-nav-icon> -->
+                  <v-btn plain><v-icon>mdi-filter</v-icon>Filters</v-btn>
+                  <v-layout column>
+                    <v-list>
+                      <!-- <v-list-title class="text-h5 grey lighten-2">
                         Filters
-                      </v-card-title>
+                      </v-list-title> -->
 
                       <v-divider></v-divider>
 
                       <v-card-text>
-                        <h4>Stock Price</h4>
+                        <p class="filter-font">Stock Price</p>
                         <v-row>
                           <v-col class="px-4">
                             <v-range-slider
                               v-model="rangePrice"
-                              :maxPrice="maxPrice"
-                              :minPrice="minPrice"
+                              :step="0.01"
+                              :min="0"
+                              :max="0.2"
                               hide-details
+                              v-on:change="stockpriceRe"
                               class="align-center"
                             >
                               <template v-slot:prepend>
@@ -78,15 +76,19 @@
                           </v-col>
                         </v-row>
 
-                        <h4>Market Capitalization</h4>
+                        <p class="filter-font">
+                          Market Capitalization in Millions count
+                        </p>
 
                         <v-row>
                           <v-col class="px-4">
                             <v-range-slider
                               v-model="rangeCap"
-                              :maxCap="maxCap"
-                              :minCap="minCap"
+                              :maxCap="200"
+                              :minCap="0"
+                              :step="10"
                               hide-details
+                              v-on:change="marketcapRe"
                               class="align-center"
                             >
                               <template v-slot:prepend>
@@ -193,19 +195,14 @@
                           </v-col>
                         </v-row>
                       </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn
-                          color="primary text-none"
-                          text
-                          @click="dialog = false"
-                        >
-                          Close
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                </div>
+                    </v-list>
+                  </v-layout>
+                </v-navigation-drawer>
+                  <v-col class="text-right">
+                <v-btn dark @click="clearGraph" class="text-capitalize">
+                  Clear graph
+                </v-btn>
+                  </v-col>
 
                 <v-divider class="my-4"></v-divider>
                 <script
@@ -213,7 +210,10 @@
                   src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"
                 ></script>
                 <div id="viz">
-                  <div class="py-4">
+                  <v-row>
+                    <v-col cols="12"
+          >
+                  <div class="py-4 searchbar">
                     <v-alert
                       class="font-italic text-center"
                       border="left"
@@ -223,6 +223,8 @@
                       <h3>Please entry to view the resulted stock graphs!</h3>
                     </v-alert>
                   </div>
+                    </v-col>
+                  </v-row>
                 </div>
               </v-card-text>
             </v-card>
@@ -232,19 +234,17 @@
     </v-row>
   </div>
 </template>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
 export default {
   data: () => ({
     search: "",
     selected: true,
-    dialog: false,
 
-    minPrice: -50,
-    maxPrice: 90,
+    drawer: true,
     rangePrice: [-20, 70],
-    minCap: -50,
-    maxCap: 90,
+    price1: "",
+    price2: "",
     rangeCap: [-20, 70],
     compRe: [],
     comp1: "",
@@ -430,6 +430,96 @@ export default {
       };
 
       var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    stockpriceRe() {
+      this.price1 = this.rangePrice[0];
+      this.price2 = this.rangePrice[1];
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          STOCKPRICE_OF: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b) WHERE a.stockPrice >= " +
+          this.price1 +
+          " AND a.stockPrice <= " +
+          this.price2 +
+          " RETURN a,r,b",
+      };
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+    marketcapRe() {
+      this.market1 = this.rangeCap[0];
+      this.market2 = this.rangeCap[1];
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Director: {
+            caption: "director",
+          },
+          Sector: {
+            caption: "sector",
+          },
+          Industry: {
+            caption: "industry",
+          },
+          MarketCap: {
+            caption: "marketCap",
+          },
+          StockPrice: {
+            caption: "stockPrice",
+          },
+        },
+        relationships: {
+          MARKETCAP_IS: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b) WHERE a.marketCap >= " +
+          this.market1 +
+          " AND a.marketCap <= " +
+          this.market2 +
+          " RETURN a,r,b",
+      };
+      var viz = new NeoVis.default(config);
+      console.log(viz);
       viz.render();
     },
     directorRe() {
@@ -636,6 +726,10 @@ export default {
         console.log("no purpose");
       }
     },
+    clearGraph()
+{
+$( "#viz" ). load(window. location. href + " #viz" );
+}
   },
   components: {
     siderbar: () => import("@/components/details/sidebar"),
@@ -644,9 +738,19 @@ export default {
 </script>
 <style scoped>
 #viz {
-  width: 700px;
-  height: 600px;
-  margin-left: 200px;
+  width: 1100px;
+  height: 900px;
+  margin-left: 50px;
   text-transform: lowercase;
+}
+
+.filter-font {
+  font-family: sans-serif;
+  font-size: 15px;
+  color: gray;
+}
+
+.searchbar{
+  margin-left:200px;
 }
 </style>
