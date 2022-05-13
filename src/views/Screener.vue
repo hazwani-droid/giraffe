@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <v-row>
@@ -6,7 +7,6 @@
           <div>
             <v-card flat color="transparent">
               <v-card-text>
-                
                 <div class="searchbar">
                   <v-text-field
                     class="mx-4 searchbar"
@@ -19,23 +19,25 @@
                     clearable
                   ></v-text-field>
                 </div>
-               
+
                 <v-navigation-drawer
                   v-model="drawer"
                   app
                   permanent
                   clipped
                   width="350px"
+                  color="#f8f9fe"
                 >
                   <!-- <v-app-bar-nav-icon  >Filters</v-app-bar-nav-icon> -->
-                  <v-btn plain><v-icon>mdi-filter</v-icon>Filters</v-btn>
+                  <div class="filter">
+                  <v-btn large color="#000000" dark><v-icon>mdi-filter</v-icon>Filters</v-btn>
+                    </div>
                   <v-layout column>
                     <v-list>
                       <!-- <v-list-title class="text-h5 grey lighten-2">
                         Filters
                       </v-list-title> -->
-
-                      <v-divider></v-divider>
+               
 
                       <v-card-text>
                         <p class="filter-font">Stock Price</p>
@@ -123,6 +125,7 @@
                               :items="peratios"
                               label="Price to earning ratio"
                               dense
+                              
                             ></v-select>
                           </v-col>
                         </v-row>
@@ -142,7 +145,7 @@
                               v-model="sector"
                               :items="sectors"
                               v-on:change="sectorRe"
-                              label="Choose a sector to view the relationships"
+                              label="Sector relations"
                               dense
                             ></v-select>
                           </v-col>
@@ -154,7 +157,7 @@
                               v-model="industry"
                               :items="industries"
                               v-on:change="industryRe"
-                              label="Choose an industry to view the relationships"
+                              label="Industry relations"
                               dense
                             ></v-select>
                           </v-col>
@@ -166,7 +169,7 @@
                               v-model="director"
                               :items="directors"
                               v-on:change="directorRe"
-                              label="Choose a director to view the relationships"
+                              label="Director relations"
                               dense
                             ></v-select>
                           </v-col>
@@ -180,7 +183,7 @@
                               :items="compRelation"
                               :menu-props="{ maxHeight: '400' }"
                               persistent-hint
-                              label="Choose companies to view their relationships"
+                              label="Company relations"
                               multiple
                               chips
                               dense
@@ -198,11 +201,12 @@
                     </v-list>
                   </v-layout>
                 </v-navigation-drawer>
-                  <v-col class="text-right">
-                <v-btn dark @click="clearGraph" class="text-capitalize">
-                  Clear graph
-                </v-btn>
-                  </v-col>
+
+                <v-col class="text-right">
+                  <v-btn dark @click="clearGraph" class="text-capitalize">
+                    Clear graph
+                  </v-btn>
+                </v-col>
 
                 <v-divider class="my-4"></v-divider>
                 <script
@@ -211,18 +215,19 @@
                 ></script>
                 <div id="viz">
                   <v-row>
-                    <v-col cols="12"
-          >
-                  <div class="py-4 searchbar">
-                    <v-alert
-                      class="font-italic text-center"
-                      border="left"
-                      colored-border
-                      color="accent"
-                    >
-                      <h3>Please entry to view the resulted stock graphs!</h3>
-                    </v-alert>
-                  </div>
+                    <v-col cols="12">
+                      <div class="py-4 searchbar">
+                        <v-alert
+                          class="font-italic text-center"
+                          border="left"
+                          colored-border
+                          color="accent"
+                        >
+                          <h3>
+                            Please entry to view the resulted stock graphs!
+                          </h3>
+                        </v-alert>
+                      </div>
                     </v-col>
                   </v-row>
                 </div>
@@ -234,7 +239,7 @@
     </v-row>
   </div>
 </template>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 export default {
   data: () => ({
@@ -726,10 +731,9 @@ export default {
         console.log("no purpose");
       }
     },
-    clearGraph()
-{
-$( "#viz" ). load(window. location. href + " #viz" );
-}
+    clearGraph() {
+      $("#viz").load(window.location.href + " #viz");
+    },
   },
   components: {
     siderbar: () => import("@/components/details/sidebar"),
@@ -750,7 +754,14 @@ $( "#viz" ). load(window. location. href + " #viz" );
   color: gray;
 }
 
-.searchbar{
-  margin-left:200px;
+.searchbar {
+  margin-left: 200px;
 }
+
+.filter {
+  background-color: black;
+  height: 45px;
+}
+
+
 </style>
