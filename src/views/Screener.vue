@@ -30,14 +30,15 @@
                 >
                   <!-- <v-app-bar-nav-icon  >Filters</v-app-bar-nav-icon> -->
                   <div class="filter">
-                  <v-btn large color="#000000" dark><v-icon>mdi-filter</v-icon>Filters</v-btn>
-                    </div>
+                    <v-btn large color="#000000" dark
+                      ><v-icon>mdi-filter</v-icon>Filters</v-btn
+                    >
+                  </div>
                   <v-layout column>
                     <v-list>
                       <!-- <v-list-title class="text-h5 grey lighten-2">
                         Filters
                       </v-list-title> -->
-               
 
                       <v-card-text>
                         <p class="filter-font">Stock Price</p>
@@ -123,9 +124,9 @@
                             <v-select
                               v-model="peratio"
                               :items="peratios"
+                              v-on:change="peratioRe"
                               label="Price to earning ratio"
                               dense
-                              
                             ></v-select>
                           </v-col>
                         </v-row>
@@ -134,6 +135,7 @@
                             <v-select
                               v-model="employee"
                               :items="employees"
+                              v-on:change="employeeRe"
                               label="Number of employees"
                               dense
                             ></v-select>
@@ -370,8 +372,8 @@ export default {
       "Industrial Goods",
       "Transportation/Logistics",
     ],
-    peratios: ["less than 50K", "More than 50K"],
-    employees: ["less than 50K", "More than 50K"],
+    peratios: ["Below 50M", "Above 50M"],
+    employees: ["Below 500", "Above 500"],
     viz: {},
   }),
 
@@ -409,6 +411,12 @@ export default {
           StockPrice: {
             caption: "stockPrice",
           },
+            Peratio: {
+            caption: "peRatio",
+          },
+          Employee: {
+            caption: "employee",
+          },
         },
         relationships: {
           DIRECTED_BY: {
@@ -426,12 +434,18 @@ export default {
           MARKETCAP_IS: {
             thickness: "count",
           },
+          HAS_EMPLOYEE: {
+            thickness: "count",
+          },
+          PERATIO_OF: {
+            thickness: "count",
+          },
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company {name: '" +
           this.search +
-          "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF]->() RETURN p ",
+          "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF]->() RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -446,20 +460,8 @@ export default {
         server_user: "Hazneo4j",
         server_password: "hazneo4j",
         labels: {
-          Company: {
+            Company: {
             caption: "ticker",
-          },
-          Director: {
-            caption: "director",
-          },
-          Sector: {
-            caption: "sector",
-          },
-          Industry: {
-            caption: "industry",
-          },
-          MarketCap: {
-            caption: "marketCap",
           },
           StockPrice: {
             caption: "stockPrice",
@@ -491,24 +493,14 @@ export default {
         server_user: "Hazneo4j",
         server_password: "hazneo4j",
         labels: {
-          Company: {
+        Company: {
             caption: "ticker",
           },
-          Director: {
-            caption: "director",
-          },
-          Sector: {
-            caption: "sector",
-          },
-          Industry: {
-            caption: "industry",
-          },
+         
           MarketCap: {
             caption: "marketCap",
           },
-          StockPrice: {
-            caption: "stockPrice",
-          },
+         
         },
         relationships: {
           MARKETCAP_IS: {
@@ -540,18 +532,7 @@ export default {
           Director: {
             caption: "director",
           },
-          Sector: {
-            caption: "sector",
-          },
-          Industry: {
-            caption: "industry",
-          },
-          MarketCap: {
-            caption: "marketCap",
-          },
-          StockPrice: {
-            caption: "stockPrice",
-          },
+     
         },
         relationships: {
           DIRECTED_BY: {
@@ -574,24 +555,13 @@ export default {
         server_user: "Hazneo4j",
         server_password: "hazneo4j",
         labels: {
-          Company: {
+            Company: {
             caption: "ticker",
-          },
-          Director: {
-            caption: "director",
           },
           Sector: {
             caption: "sector",
           },
-          Industry: {
-            caption: "industry",
-          },
-          MarketCap: {
-            caption: "marketCap",
-          },
-          StockPrice: {
-            caption: "stockPrice",
-          },
+        
         },
         relationships: {
           SECTORED_IN: {
@@ -615,24 +585,13 @@ export default {
         server_user: "Hazneo4j",
         server_password: "hazneo4j",
         labels: {
-          Company: {
+            Company: {
             caption: "ticker",
-          },
-          Director: {
-            caption: "director",
-          },
-          Sector: {
-            caption: "sector",
           },
           Industry: {
             caption: "industry",
           },
-          MarketCap: {
-            caption: "marketCap",
-          },
-          StockPrice: {
-            caption: "stockPrice",
-          },
+        
         },
         relationships: {
           INDUSTRALIZE_IN: {
@@ -644,6 +603,146 @@ export default {
           "MATCH p=(Company {industry: '" +
           this.industry +
           "'})-[r:INDUSTRALIZE_IN]->() RETURN p  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+    peratioRe() {
+      console.log(this.peratio);
+      if (this.peratio == "Below 50M") {
+        console.log(this.peratio);
+        return this.peratioLessRee();
+      }
+      if (this.peratio == "Above 50M") {
+        console.log(this.peratio);
+        return this.peratioMoreRee();
+      }
+    },
+    peratioMoreRee() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+        Company: {
+            caption: "ticker",
+          },
+            Peratio: {
+            caption: "peRatio",
+          },
+         
+        },
+        relationships: {
+          PERATIO_OF: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b) WHERE a.peRatio >= 50 RETURN a,r,b  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+    peratioLessRee() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+         Company: {
+            caption: "ticker",
+          },
+         
+            Peratio: {
+            caption: "peRatio",
+          },
+         
+        },
+        relationships: {
+          PERATIO_OF: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b) WHERE a.peRatio <= 50 RETURN a,r,b  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+
+    employeeRe() {
+      if (this.employee == "Above 500") {
+        console.log(this.employee);
+        return this.employeeMoreRee();
+      }
+      if (this.employee == "Below 500") {
+        console.log(this.employee);
+        return this.employeeLessRee();
+      }
+    },
+    employeeMoreRee() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+        Company: {
+            caption: "ticker",
+          },
+         
+          Employee: {
+            caption: "employee",
+          },
+        },
+        relationships: {
+          HAS_EMPLOYEE: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b) WHERE a.employee >= 500 RETURN a,r,b  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(viz);
+      viz.render();
+    },
+    employeeLessRee() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          
+         Company: {
+            caption: "ticker",
+          },
+         
+          Employee: {
+            caption: "employee",
+          },
+        },
+        relationships: {
+          HAS_EMPLOYEE: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b) WHERE a.employee <= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -683,6 +782,12 @@ export default {
           StockPrice: {
             caption: "stockPrice",
           },
+            Peratio: {
+            caption: "peRatio",
+          },
+          Employee: {
+            caption: "employee",
+          },
         },
         relationships: {
           DIRECTED_BY: {
@@ -698,6 +803,12 @@ export default {
             thickness: "count",
           },
           MARKETCAP_IS: {
+            thickness: "count",
+          },
+          HAS_EMPLOYEE: {
+            thickness: "count",
+          },
+           PERATIO_OF: {
             thickness: "count",
           },
         },
@@ -762,6 +873,4 @@ export default {
   background-color: black;
   height: 45px;
 }
-
-
 </style>

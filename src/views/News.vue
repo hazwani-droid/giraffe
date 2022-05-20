@@ -1,86 +1,284 @@
+
 <template>
   <div>
     <v-row>
       <v-col cols="12" lg="12" xl="8">
-        <div>
+        <div class="filters">
+          <v-btn   class="text-capitalize" outlined @click="filter1">
+            Technology
+          </v-btn>
+          <v-btn class="text-capitalize" outlined @click="filter2">
+            Business
+          </v-btn>
+          <v-btn class="text-capitalize" outlined @click="filter3">
+            Economy
+          </v-btn>
+          <v-btn class="text-capitalize" outlined @click="filter4">
+            Politics
+          </v-btn>
+          <v-btn class="text-capitalize" outlined @click="filter5">
+            Medical
+          </v-btn>
+          <v-btn class="text-capitalize" outlined @click="filter6">
+            Social
+          </v-btn>
+          <script
+            type="application/javascript"
+            src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"
+          ></script>
           <div>
-            <div>
-              <h2 class="text-h4 font-weight-bold">ANIMAL</h2>
-
-              <h4 class="text-h6">Some category description goes here</h4>
-            </div>
-
-            <v-divider class="my-4"></v-divider>
-
-            <v-row>
-              <v-col cols="12" md="6" lg="4" v-for="i in 18" :key="i">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="50"
-                  close-delay="50"
-                >
-                  <div>
-                    <v-card
-                      flat
-                      :color="hover ? 'white' : 'transparent'"
-                      :elevation="hover ? 12 : 0"
-                      hover
-                      to="/detail"
-                    >
-                      <v-img
-                        src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg"
-                        :aspect-ratio="16 / 9"
-                        gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
-                        height="200px"
-                        class="elevation-2"
-                        style="border-radius: 16px"
-                      >
-                        <v-card-text>
-                          <v-btn color="accent">ANIMAL</v-btn>
-                        </v-card-text>
-                      </v-img>
-
-                      <v-card-text>
-                        <div class="text-h5 font-weight-bold primary--text">
-                          How to write an awesome blog post in 5 steps
-                        </div>
-
-                        <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
-                        </div>
-
-                        <div class="d-flex align-center">
-                          <v-avatar color="accent" size="36">
-                            <v-icon dark>mdi-feather</v-icon>
-                          </v-avatar>
-
-                          <div class="pl-2">Yan Lee · 22 July 2019</div>
-                        </div>
-                      </v-card-text>
-                    </v-card>
-                  </div>
-                </v-hover>
-              </v-col>
-            </v-row>
+            <div id="viz"></div>
           </div>
         </div>
       </v-col>
-
-      <v-col>
-        <div>
-          <siderbar />
-        </div>
-      </v-col>
     </v-row>
+     <v-navigation-drawer
+                  v-model="drawer"
+                  app
+                  permanent
+                  clipped
+                  width="350px"
+                  color="#f8f9fe"
+                >
+                  <!-- <v-app-bar-nav-icon  >Filters</v-app-bar-nav-icon> -->
+                  <div >
+                   
+                  </div>
+                  <v-layout column>
+                    <v-list>
+                    
+                    </v-list>
+                  </v-layout>
+                </v-navigation-drawer>
   </div>
 </template>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 export default {
-  name: "Category",
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
+  data: () => ({
+    viz: {},
+      drawer: true,
+  }),
+
+  methods: {
+    filter1() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Technology'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    filter2() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Business'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+
+    filter3() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Economy'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+
+    filter4() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Politics'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    filter5() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Medical'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
+    filter6() {
+      var config = {
+        container_id: "viz",
+        server_url: "neo4j://localhost:7687",
+        server_user: "Hazneo4j",
+        server_password: "hazneo4j",
+        labels: {
+          News: {
+            caption: "code",
+          },
+          Keyword: {
+            caption: "keyword",
+          },
+          Title: {
+            caption: "title",
+          },
+          Source: {
+            caption: "source",
+          },
+        },
+        relationships: {
+          KEYWORD_IS: {
+            thickness: "count",
+            caption: false,
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(News {keyword: 'Social'})-[r:KEYWORD_IS]->() RETURN p ",
+      };
+
+      var viz = new NeoVis.default(config);
+      viz.render();
+    },
   },
 };
 </script>
+<style scoped>
+#viz {
+  width: 1100px;
+  height: 900px;
+  margin-left: 50px;
+  text-transform: lowercase;
+}
+
+.filters {
+  margin-left: 200px;
+}
+</style>

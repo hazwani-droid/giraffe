@@ -67,6 +67,7 @@
 
           <v-col v-if="$vuetify.breakpoint.mdAndUp" cols="6">
             <v-btn
+              rounded
                 v-for="(item, i) in barItems"
                 :key="i"
                 :to="item.to"
@@ -89,6 +90,7 @@
                 :target="item.target"
                 :to="item.to"
                 class="ml-3 text-capitalize"
+                rounded
             >
               <v-icon left>{{ item.icon }}</v-icon>
               {{ item.text }}

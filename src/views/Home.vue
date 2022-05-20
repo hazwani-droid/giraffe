@@ -16,7 +16,7 @@
               </v-col>
               <v-col cols="12" lg="8" md="10" xl="7">
                 <h2 class="text-h3 py-3" style="line-height: 1.2">
-                  Great Travel Blogs From Around The World To Inspire You
+                 KALUDHEEEEE!!!!!!!!
                 </h2>
               </v-col>
               <v-col class="d-flex align-center">
