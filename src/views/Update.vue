@@ -127,8 +127,9 @@
                   >
                 </v-card>
               </v-dialog>
+              <v-spacer></v-spacer>
               <v-row>
-                <v-col align="center">
+                <v-col>
                   <p>
                     Update existing company?
                     <v-btn class="text-none" color="blue darken-1" plain
