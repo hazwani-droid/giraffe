@@ -179,11 +179,6 @@
         </div>
       </v-col>
 
-      <v-col>
-        <div class="pt-16">
-          <siderbar/>
-        </div>
-      </v-col>
     </v-row>
   </div>
 </template>

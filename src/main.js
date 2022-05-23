@@ -3,6 +3,9 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import router from './router'
 
+import VueNeo4j from 'vue-neo4j'
+
+Vue.use(VueNeo4j)
 Vue.config.productionTip = false
 
 new Vue({

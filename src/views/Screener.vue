@@ -606,7 +606,7 @@ export default {
       };
 
       var viz = new NeoVis.default(config);
-      console.log(viz);
+      console.log(this.industry);
       viz.render();
     },
     peratioRe() {

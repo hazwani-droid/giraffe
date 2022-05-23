@@ -4,11 +4,8 @@
       <v-card>
           <v-row>
             <v-spacer></v-spacer>
-            <v-card-title class="justify-center"> Add Company </v-card-title>
+            <v-card-title class="justify-center"> New Company Form </v-card-title>
             <v-spacer></v-spacer>
-            <v-btn plain fab @click="updateD = false" text color="primary">
-              <v-icon dark> mdi-close </v-icon>
-            </v-btn>
           </v-row>
 
           <v-card-text>
@@ -145,9 +142,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="updateD = false">
-              Close
-            </v-btn>
+           
             <v-btn color="blue darken-1" text @click="updateD = false">
               Save Record
             </v-btn>
