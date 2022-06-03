@@ -185,7 +185,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Technology'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Technology'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -219,7 +219,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Business'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Business'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -254,7 +254,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Economy'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Economy'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -289,7 +289,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Politics'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Politics'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -323,7 +323,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Medical'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Medical'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -357,7 +357,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(News {keyword: 'Social'})-[r:KEYWORD_IS]->() RETURN p ",
+          "MATCH p=(Company)-[r:KEYWORD_IS]->(News {keyword: 'Social'}) RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -394,7 +394,7 @@ export default {
 
     //   // Or you can just call this.$neo4j.run(cypher, params)
     //   session
-    //     .run("MATCH(n:News) RETURN n")
+        // .run("MATCH(n:News) RETURN n")
     //     .then(function (result) {
     //       var newsArr = [];
     //       result.records.forEach(function (record) {
@@ -405,7 +405,7 @@ export default {
 
     //       });
 
-    //     })
+    // //     })
     //     .catch(function (err) {
     //       console.log(err,"hhbj");
     //     });

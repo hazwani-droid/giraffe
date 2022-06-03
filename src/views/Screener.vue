@@ -205,7 +205,7 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark @click="clearGraph" class="text-capitalize">
+                  <v-btn dark    class="text-capitalize">
                     Clear graph
                   </v-btn>
                 </v-col>
@@ -218,7 +218,7 @@
                 <div id="viz">
                   <v-row>
                     <v-col cols="12">
-                      <div class="py-4 searchbar">
+                      <div  class="py-4 searchbar">
                         <v-alert
                           class="font-italic text-center"
                           border="left"
@@ -242,12 +242,14 @@
   </div>
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
 <script>
+
 export default {
   data: () => ({
     search: "",
     selected: true,
-
+    graph:false,
     drawer: true,
     rangePrice: [-20, 70],
     price1: "",
@@ -474,9 +476,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b) WHERE a.stockPrice >= " +
+          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b:StockPrice) WHERE b.stockPrice >= " +
           this.price1 +
-          " AND a.stockPrice <= " +
+          " AND b.stockPrice <= " +
           this.price2 +
           " RETURN a,r,b",
       };
@@ -509,9 +511,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b) WHERE a.marketCap >= " +
+          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b:MarketCap) WHERE b.marketCap >= " +
           this.market1 +
-          " AND a.marketCap <= " +
+          " AND b.marketCap <= " +
           this.market2 +
           " RETURN a,r,b",
       };
@@ -541,9 +543,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company {director: '" +
+          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {director: '" +
           this.director +
-          "'})-[r:DIRECTED_BY]->() RETURN p ",
+          "'}) RETURN p ",
       };
       var viz = new NeoVis.default(config);
       viz.render();
@@ -570,9 +572,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company {sector: '" +
+          "MATCH p=(Company)-[r:SECTORED_IN]->(Sector {sector: '" +
           this.sector +
-          "'})-[r:SECTORED_IN]->() RETURN p  ",
+          "'}) RETURN p  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -600,9 +602,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company {industry: '" +
+          "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industry: '" +
           this.industry +
-          "'})-[r:INDUSTRALIZE_IN]->() RETURN p  ",
+          "'}) RETURN p  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -642,7 +644,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b) WHERE a.peRatio >= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peRatio >= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -672,7 +674,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b) WHERE a.peRatio <= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peRatio <= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -712,7 +714,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b) WHERE a.employee >= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.employee >= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -742,7 +744,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b) WHERE a.employee <= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.employee <= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -843,7 +845,7 @@ export default {
       }
     },
     clearGraph() {
-      $("#viz").load(window.location.href + " #viz");
+ this.graph = true;
     },
   },
   components: {

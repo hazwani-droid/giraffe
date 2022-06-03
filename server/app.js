@@ -7,9 +7,9 @@
 
 // var app = express();
 
-// // //view engine
-// // app.set ('views', path.join(__dirname, 'views'));
-// // app.set('view engine', 'ejs');
+// //view engine
+// app.set ('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'vue');
 
 // app.use(logger('dev'));
 // app.use(bodyParser.json());
@@ -21,29 +21,15 @@
 
 // var driver = neo4j.driver('bolt://localhost', neo4j.auth.basic('Hazneo4j', 'hazneo4j'));
 // var session = driver.session();
+//  app.post('/company/add',function(req,res){
+//      var name =req.body.name;
+//      var ticker = req.body.ticker;
+
+//      console.log(name)
+//      res.redirect('/')
+//  })
 
 
-// app.get('/', function(req,res){
-//     session
-//     .run('MATCH(n:News) RETURN n')
-//     .then(function(result){
-//         var newsArr = [];
-//         result.records.forEach(function(record){
-//             newsArr.push({
-//             title: record._fields[0].properties.title,
-//             keyword:record._fields[0].properties.keyword,
-//             });
-            
-//         });
-//         // res.render('index', {
-//         //     companies : companyArr
-//         // });
-//     })
-//     .catch(function(err){
-//         console.log(err);
-//     })
-  
-// });
 
 
 

@@ -16,7 +16,7 @@
               </v-col>
               <v-col cols="12" lg="8" md="10" xl="7">
                 <h2 class="text-h3 py-3" style="line-height: 1.2">
-                 KALUDHEEEEE!!!!!!!!
+                 STOCKNEO
                 </h2>
               </v-col>
               <v-col class="d-flex align-center">
@@ -32,7 +32,7 @@
       </v-card>
     </div>
 
-    <v-row>
+    <!-- <v-row>
       <v-col cols="12" lg="12" xl="8">
         <div>
           <div class="pt-16">
@@ -179,7 +179,7 @@
         </div>
       </v-col>
 
-    </v-row>
+    </v-row> -->
   </div>
 </template>
 
