@@ -205,9 +205,7 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark    class="text-capitalize">
-                    Clear graph
-                  </v-btn>
+                  <v-btn dark class="text-capitalize"> Clear graph </v-btn>
                 </v-col>
 
                 <v-divider class="my-4"></v-divider>
@@ -218,7 +216,7 @@
                 <div id="viz">
                   <v-row>
                     <v-col cols="12">
-                      <div  class="py-4 searchbar">
+                      <div class="py-4 searchbar">
                         <v-alert
                           class="font-italic text-center"
                           border="left"
@@ -244,12 +242,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
 <script>
-
 export default {
   data: () => ({
     search: "",
     selected: true,
-    graph:false,
+    graph: false,
     drawer: true,
     rangePrice: [-20, 70],
     price1: "",
@@ -327,24 +324,7 @@ export default {
       "Lambo Group Berhad",
       "NetX Holdings Berhad",
     ],
-    directors: [
-      "Pui Hold Ho",
-      "Yew Khid Wong",
-      "Khai Shyuan Kua",
-      "Yew Kee Roy Ho",
-      "Ng Kok Heng",
-      "Siew Wei Mak",
-      "Lee Aun Choong",
-      "Ming Chang Lim",
-      "Soo Chye Yu",
-      "Woon Chet Chai",
-      "Huei Ping Chen",
-      "Chow Huat Pang",
-      "Chor How Tan",
-      "Wai Keong Hoo",
-      "Guo Hua Zhuang",
-      "Sik Eek Tan",
-    ],
+
     sectors: [
       "Footwear",
       "Building Materials/Products",
@@ -388,12 +368,13 @@ export default {
     // },
     CompanyOversea() {
       console.log(this.search);
+      var search = this.search.toLowerCase();
       var config = {
         search: this.search,
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           Company: {
             caption: "ticker",
@@ -413,7 +394,7 @@ export default {
           StockPrice: {
             caption: "stockPrice",
           },
-            Peratio: {
+          Peratio: {
             caption: "peRatio",
           },
           Employee: {
@@ -446,7 +427,7 @@ export default {
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company {name: '" +
-          this.search +
+          search +
           "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF]->() RETURN p ",
       };
 
@@ -458,11 +439,11 @@ export default {
       this.price2 = this.rangePrice[1];
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-            Company: {
+          Company: {
             caption: "ticker",
           },
           StockPrice: {
@@ -491,18 +472,17 @@ export default {
       this.market2 = this.rangeCap[1];
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-        Company: {
+          Company: {
             caption: "ticker",
           },
-         
+
           MarketCap: {
             caption: "marketCap",
           },
-         
         },
         relationships: {
           MARKETCAP_IS: {
@@ -522,11 +502,12 @@ export default {
       viz.render();
     },
     directorRe() {
+      var director = this.director.toLowerCase();
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           Company: {
             caption: "ticker",
@@ -534,7 +515,6 @@ export default {
           Director: {
             caption: "director",
           },
-     
         },
         relationships: {
           DIRECTED_BY: {
@@ -544,26 +524,26 @@ export default {
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {director: '" +
-          this.director +
+          director +
           "'}) RETURN p ",
       };
       var viz = new NeoVis.default(config);
       viz.render();
     },
     sectorRe() {
+      var sector = this.sector.toLowerCase();
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-            Company: {
+          Company: {
             caption: "ticker",
           },
           Sector: {
             caption: "sector",
           },
-        
         },
         relationships: {
           SECTORED_IN: {
@@ -573,7 +553,7 @@ export default {
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company)-[r:SECTORED_IN]->(Sector {sector: '" +
-          this.sector +
+          sector +
           "'}) RETURN p  ",
       };
 
@@ -581,19 +561,19 @@ export default {
       viz.render();
     },
     industryRe() {
+      var industry = this.industry.toLowerCase();
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-            Company: {
+          Company: {
             caption: "ticker",
           },
           Industry: {
             caption: "industry",
           },
-        
         },
         relationships: {
           INDUSTRALIZE_IN: {
@@ -603,7 +583,7 @@ export default {
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industry: '" +
-          this.industry +
+          industry +
           "'}) RETURN p  ",
       };
 
@@ -625,17 +605,16 @@ export default {
     peratioMoreRee() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-        Company: {
+          Company: {
             caption: "ticker",
           },
-            Peratio: {
+          Peratio: {
             caption: "peRatio",
           },
-         
         },
         relationships: {
           PERATIO_OF: {
@@ -654,18 +633,17 @@ export default {
     peratioLessRee() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-         Company: {
+          Company: {
             caption: "ticker",
           },
-         
-            Peratio: {
+
+          Peratio: {
             caption: "peRatio",
           },
-         
         },
         relationships: {
           PERATIO_OF: {
@@ -695,14 +673,14 @@ export default {
     employeeMoreRee() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-        Company: {
+          Company: {
             caption: "ticker",
           },
-         
+
           Employee: {
             caption: "employee",
           },
@@ -724,15 +702,14 @@ export default {
     employeeLessRee() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
-          
-         Company: {
+          Company: {
             caption: "ticker",
           },
-         
+
           Employee: {
             caption: "employee",
           },
@@ -753,18 +730,22 @@ export default {
     },
 
     comAllRelation() {
-      this.comp1 = this.compRe[0];
-      this.comp2 = this.compRe[1];
-      this.comp3 = this.compRe[2];
-      this.comp4 = this.compRe[3];
-      this.comp5 = this.compRe[4];
-      this.comp6 = this.compRe[5];
+      const compRe = this.compRe.map((element) => {
+        return element.toLowerCase();
+      });
+
+      var comp1 = compRe[0];
+      var comp2 = compRe[1];
+      var comp3 = compRe[2];
+      var comp4 = compRe[3];
+      var comp5 = compRe[4];
+      var comp6 = compRe[5];
 
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           Company: {
             caption: "ticker",
@@ -784,7 +765,7 @@ export default {
           StockPrice: {
             caption: "stockPrice",
           },
-            Peratio: {
+          Peratio: {
             caption: "peRatio",
           },
           Employee: {
@@ -810,24 +791,24 @@ export default {
           HAS_EMPLOYEE: {
             thickness: "count",
           },
-           PERATIO_OF: {
+          PERATIO_OF: {
             thickness: "count",
           },
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH (a:Company)-[r]->(b) WHERE a.name IN ['" +
-          this.comp1 +
+          comp1 +
           "','" +
-          this.comp2 +
+          comp2 +
           "','" +
-          this.comp3 +
+          comp3 +
           "','" +
-          this.comp4 +
+          comp4 +
           "','" +
-          this.comp5 +
+          comp5 +
           "','" +
-          this.comp6 +
+          comp6 +
           "'] RETURN a,r,b",
       };
 
@@ -845,7 +826,7 @@ export default {
       }
     },
     clearGraph() {
- this.graph = true;
+      this.graph = true;
     },
   },
   components: {

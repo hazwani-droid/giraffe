@@ -160,9 +160,9 @@ export default {
     filter1() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",
@@ -194,9 +194,9 @@ export default {
     filter2() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",
@@ -229,9 +229,9 @@ export default {
     filter3() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",
@@ -264,9 +264,9 @@ export default {
     filter4() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",
@@ -298,9 +298,9 @@ export default {
     filter5() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",
@@ -332,9 +332,9 @@ export default {
     filter6() {
       var config = {
         container_id: "viz",
-        server_url: "neo4j://localhost:7687",
-        server_user: "Hazneo4j",
-        server_password: "hazneo4j",
+         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
           News: {
             caption: "code",

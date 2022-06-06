@@ -25,35 +25,41 @@
                 label="Ticker Label"
                 color="blue accent-3"
                 v-model="ticker"
+                  required
               ></v-text-field>
               <v-text-field
                 label="No. of Employee"
                 color="blue accent-3"
                 v-model="employee"
+                  required
               ></v-text-field>
 
               <v-text-field
                 label="Stock Price"
                 color="blue accent-3"
                 v-model="stockPrice"
+                  required
               ></v-text-field>
 
               <v-text-field
                 label="Market Capitalization"
                 color="blue accent-3"
                 v-model="marketCap"
+                  required
               ></v-text-field>
 
               <v-text-field
                 label="Directors"
                 color="blue accent-3"
                 v-model="director"
+                  required
               ></v-text-field>
 
               <v-text-field
                 label="Sector"
                 v-model="sector"
                 color="blue accent-3"
+                  required
               ></v-text-field>
 
               <v-text-field
@@ -61,11 +67,13 @@
                 dense
                 color="blue accent-3"
                 v-model="industry"
+                  required
               ></v-text-field>
               <v-text-field
                 label="Price per Earning Ratio"
                 color="blue accent-3"
                 v-model="peratio"
+                  required
               ></v-text-field>
 
               <v-textarea
@@ -173,35 +181,13 @@ export default {
     stockPrice: null,
     director: null,
 
-    protocol: "neo4j://localhost:7687",
-    host: "localhost",
-    port: 7687,
-    username: "Hazneo4j",
-    password: "hazneo4j",
+
   }),
   methods: {
-    connect() {
-      return this.$neo4j
-        .connect(
-          this.protocol,
-          this.host,
-          this.port,
-          this.username,
-          this.password,
-          console.log("hsbjshb")
-        )
-        .then(() => {
-          return this.$neo4j.getDriver();
-        });
-    },
-    // driver() {
-    //   // Get a driver instance
-    //   return this.$neo4j.getDriver();
-    // },
     submitRegister() {
       var driver = neo4j.driver(
-        "bolt://localhost",
-        neo4j.auth.basic("Hazneo4j", "hazneo4j")
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
       );
       var session = driver.session();
       console.log(this.data);
