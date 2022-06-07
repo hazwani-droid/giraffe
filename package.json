@@ -6,7 +6,6 @@
     "node": "12.11.1"
     },
   "scripts": {
-    "start": "npm run dev",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
