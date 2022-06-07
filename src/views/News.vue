@@ -159,6 +159,7 @@ export default {
   methods: {
     filter1() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -193,6 +194,7 @@ export default {
     },
     filter2() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -228,6 +230,7 @@ export default {
 
     filter3() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
           server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -263,6 +266,7 @@ export default {
 
     filter4() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
           server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -297,6 +301,7 @@ export default {
     },
     filter5() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -331,6 +336,7 @@ export default {
     },
     filter6() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
          server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",

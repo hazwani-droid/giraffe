@@ -370,6 +370,7 @@ export default {
       console.log(this.search);
       var search = this.search.toLowerCase();
       var config = {
+        encrypted: "ENCRYPTION_ON",
         search: this.search,
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
@@ -438,6 +439,7 @@ export default {
       this.price1 = this.rangePrice[0];
       this.price2 = this.rangePrice[1];
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -471,6 +473,7 @@ export default {
       this.market1 = this.rangeCap[0];
       this.market2 = this.rangeCap[1];
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -504,6 +507,7 @@ export default {
     directorRe() {
       var director = this.director.toLowerCase();
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -564,6 +568,7 @@ export default {
     industryRe() {
       var industry = this.industry.toLowerCase();
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -605,6 +610,7 @@ export default {
     },
     peratioMoreRee() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -633,6 +639,7 @@ export default {
     },
     peratioLessRee() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -673,6 +680,7 @@ export default {
     },
     employeeMoreRee() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -702,6 +710,7 @@ export default {
     },
     employeeLessRee() {
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -743,6 +752,7 @@ export default {
       var comp6 = compRe[5];
 
       var config = {
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
