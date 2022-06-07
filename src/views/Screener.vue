@@ -829,9 +829,7 @@ export default {
       this.graph = true;
     },
   },
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
-  },
+
 };
 </script>
 <style scoped>
