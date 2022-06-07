@@ -534,7 +534,7 @@ export default {
       var sector = this.sector.toLowerCase();
       var config = {
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j+s://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
         labels: {
