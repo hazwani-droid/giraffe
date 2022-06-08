@@ -205,7 +205,7 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark class="text-capitalize"> Clear graph </v-btn>
+                  <v-btn dark class="text-capitalize" v-if="clearGraph"> Clear graph </v-btn>
                 </v-col>
 
                 <v-divider class="my-4"></v-divider>
@@ -246,7 +246,7 @@ export default {
   data: () => ({
     search: "",
     selected: true,
-    graph: false,
+    
     drawer: true,
     rangePrice: [-20, 70],
     price1: "",
@@ -439,7 +439,7 @@ export default {
       this.price1 = this.rangePrice[0];
       this.price2 = this.rangePrice[1];
       var config = {
-        encrypted: "ENCRYPTION_ON",
+        // encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -837,7 +837,7 @@ export default {
       }
     },
     clearGraph() {
-      this.graph = true;
+        document.getElementById("viz").reset();
     },
   },
 

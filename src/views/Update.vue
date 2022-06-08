@@ -94,7 +94,7 @@
                 color="blue darken-1"
                 @click.stop="submitRegister"
                 text
-               
+               class="justify-end"
                 @click="dialog2 = true"
               >
                 Save
