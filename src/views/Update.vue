@@ -29,6 +29,22 @@
                 required
                 :rules="stringRules"
               ></v-text-field>
+
+              <v-select
+                label="Principal place of businessn (State)"
+                v-model="state"
+                color="blue accent-3"
+                required
+                  :items="states"
+                :rules="stringRules"
+              ></v-select>
+              <v-text-field
+                label="Principal place of businessn (City)"
+                v-model="city"
+                color="blue accent-3"
+                required
+                :rules="stringRules"
+              ></v-text-field>
               <v-text-field
                 label="No. of Employee"
                 color="blue accent-3"
@@ -208,7 +224,22 @@ export default {
     stockPrice: null,
     director: null,
     company: [],
+    states:[
+      "selangor",
+      "negeri sembilan",
+      "johor",
+      "kelantan",
+      "sabah",
+      "sarawak",
+      "penang",
+      "kedah",
+      "perak",
+      "perlis",
+      "terengganu",
+      "pahang",
+      "malacca",
 
+    ],
     isOperationSuccess: false,
     validRegister: "",
     stringRules: [
@@ -235,6 +266,8 @@ export default {
       var industry = this.industry.toLowerCase();
       var sector = this.sector.toLowerCase();
       var director = this.director.toLowerCase();
+       var city = this.city.toLowerCase();
+        var state = this.state.toLowerCase();
 
       // // Get a session from the driver
       //   const session = this.$neo4j.getSession();
@@ -258,7 +291,11 @@ export default {
             sector +
             "'}) MERGE (c)-[:SECTORED_IN]->(b)  MERGE (m:StockPrice {stockPrice:toFloat(" +
             this.stockPrice +
-            ")}) MERGE (c)-[:STOCKPRICE_OF]->(m) "
+            ")}) MERGE (c)-[:STOCKPRICE_OF]->(m) MERGE (q:Location {state:'" +
+            state +
+            "', city: '" +
+            city +
+            "'})"
         )
         .then(function () {
           session.close();
