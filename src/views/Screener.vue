@@ -8,7 +8,7 @@
             <v-card flat color="transparent">
               <v-card-text>
                 <div class="searchbar">
-                  <v-text-field
+                  <v-autocomplete
                     class="mx-4 searchbar"
                     flat
                     v-on:change="CompanyOversea"
@@ -17,7 +17,9 @@
                     solo-inverted
                     append-icon="mdi-magnify"
                     clearable
-                  ></v-text-field>
+                    :items="companies"
+                    item-text="name"
+                  ></v-autocomplete>
                 </div>
 
                 <v-navigation-drawer
@@ -146,6 +148,7 @@
                             <v-select
                               v-model="sector"
                               :items="sectors"
+                              item-text="sector"
                               v-on:change="sectorRe"
                               label="Sector relations"
                               dense
@@ -158,6 +161,7 @@
                             <v-select
                               v-model="industry"
                               :items="industries"
+                              item-text="industry"
                               v-on:change="industryRe"
                               label="Industry relations"
                               dense
@@ -170,6 +174,7 @@
                             <v-select
                               v-model="director"
                               :items="directors"
+                              item-text="director"
                               v-on:change="directorRe"
                               label="Director relations"
                               dense
@@ -180,9 +185,23 @@
                         <v-row>
                           <v-col>
                             <v-select
+                              v-model="place"
+                              :items="places"
+                              item-text="state"
+                              v-on:change="placeRe"
+                              label="Principal place of business"
+                              dense
+                            ></v-select>
+                          </v-col>
+                        </v-row>
+
+                        <v-row>
+                          <v-col>
+                            <v-select
                               v-model="compRe"
                               v-on:change="comAllRelation"
-                              :items="compRelation"
+                              :items="companies"
+                              item-text="name"
                               :menu-props="{ maxHeight: '400' }"
                               persistent-hint
                               label="Company relations"
@@ -205,7 +224,9 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark class="text-capitalize" v-if="clearGraph"> Clear graph </v-btn>
+                  <v-btn dark class="text-capitalize" v-if="clearGraph">
+                    Clear graph
+                  </v-btn>
                 </v-col>
 
                 <v-divider class="my-4"></v-divider>
@@ -242,11 +263,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
 <script>
+import neo4j from "neo4j-driver";
 export default {
   data: () => ({
     search: "",
+    place:"",
     selected: true,
-    
+    companies: [],
+    sectors: [],
+    industries: [],
+    directors: [],
+    places:[],
     drawer: true,
     rangePrice: [-20, 70],
     price1: "",
@@ -260,112 +287,245 @@ export default {
     peratio: "",
     employee: "",
     director: "",
-    directors: [
-      "Pui Hold Ho",
-      "Yew Khid Wong",
-      "Khai Shyuan Kua",
-      "Yew Kee Roy Ho",
-      "Ng Kok Heng",
-      "Siew Wei Mak",
-      "Lee Aun Choong",
-      "Ming Chang Lim",
-      "Soo Chye Yu",
-      "Woon Chet Chai",
-      "Huei Ping Chen",
-      "Chow Huat Pang",
-      "Chor How Tan",
-      "Wai Keong Hoo",
-      "Guo Hua Zhuang",
-      "Sik Eek Tan",
-    ],
-    compRelation: [
-      "Xidelang Holdings LTD",
-      "Seacera Group Berhad",
-      "DGB Asia Berhad",
-      "Key Alliance Group Berhad",
-      "XOX Berhad",
-      "M3 Technologies (Asia) Berhad",
-      "Saudee Group Berhad",
-      "Green Ocean Corporation Berhad",
-      "AT Systemization Berhad",
-      "Trive Property Group Berhad",
-      "Fintec Global Berhad",
-      "Focus Dynamics Group Berhad",
-      "Oversea Enterprise Bhd",
-      "Anzo Holding Bhd",
-      "mTouche Technology Bhd",
-      "Sanichi Technology Berhad",
-      "PDZ Holdings Berhad",
-      "MNC Wireless Berhad",
-      "Metronic Global Bhd",
-      "Lambo Group Berhad",
-      "NetX Holdings Berhad",
-    ],
-    value: [
-      "Xidelang Holdings LTD",
-      "Seacera Group Berhad",
-      "DGB Asia Berhad",
-      "Key Alliance Group Berhad",
-      "XOX Berhad",
-      "M3 Technologies (Asia) Berhad",
-      "Saudee Group Berhad",
-      "Green Ocean Corporation Berhad",
-      "AT Systemization Berhad",
-      "Trive Property Group Berhad",
-      "Fintec Global Berhad",
-      "Focus Dynamics Group Berhad",
-      "Oversea Enterprise Bhd",
-      "Anzo Holding Bhd",
-      "mTouche Technology Bhd",
-      "Sanichi Technology Berhad",
-      "PDZ Holdings Berhad",
-      "MNC Wireless Berhad",
-      "Metronic Global Bhd",
-      "Lambo Group Berhad",
-      "NetX Holdings Berhad",
-    ],
+    // directors: [
+    //   "Pui Hold Ho",
+    //   "Yew Khid Wong",
+    //   "Khai Shyuan Kua",
+    //   "Yew Kee Roy Ho",
+    //   "Ng Kok Heng",
+    //   "Siew Wei Mak",
+    //   "Lee Aun Choong",
+    //   "Ming Chang Lim",
+    //   "Soo Chye Yu",
+    //   "Woon Chet Chai",
+    //   "Huei Ping Chen",
+    //   "Chow Huat Pang",
+    //   "Chor How Tan",
+    //   "Wai Keong Hoo",
+    //   "Guo Hua Zhuang",
+    //   "Sik Eek Tan",
+    // ],
+    // compRelation: [
+    //   "Xidelang Holdings LTD",
+    //   "Seacera Group Berhad",
+    //   "DGB Asia Berhad",
+    //   "Key Alliance Group Berhad",
+    //   "XOX Berhad",
+    //   "M3 Technologies (Asia) Berhad",
+    //   "Saudee Group Berhad",
+    //   "Green Ocean Corporation Berhad",
+    //   "AT Systemization Berhad",
+    //   "Trive Property Group Berhad",
+    //   "Fintec Global Berhad",
+    //   "Focus Dynamics Group Berhad",
+    //   "Oversea Enterprise Bhd",
+    //   "Anzo Holding Bhd",
+    //   "mTouche Technology Bhd",
+    //   "Sanichi Technology Berhad",
+    //   "PDZ Holdings Berhad",
+    //   "MNC Wireless Berhad",
+    //   "Metronic Global Bhd",
+    //   "Lambo Group Berhad",
+    //   "NetX Holdings Berhad",
+    // ],
+    // value: [
+    //   "Xidelang Holdings LTD",
+    //   "Seacera Group Berhad",
+    //   "DGB Asia Berhad",
+    //   "Key Alliance Group Berhad",
+    //   "XOX Berhad",
+    //   "M3 Technologies (Asia) Berhad",
+    //   "Saudee Group Berhad",
+    //   "Green Ocean Corporation Berhad",
+    //   "AT Systemization Berhad",
+    //   "Trive Property Group Berhad",
+    //   "Fintec Global Berhad",
+    //   "Focus Dynamics Group Berhad",
+    //   "Oversea Enterprise Bhd",
+    //   "Anzo Holding Bhd",
+    //   "mTouche Technology Bhd",
+    //   "Sanichi Technology Berhad",
+    //   "PDZ Holdings Berhad",
+    //   "MNC Wireless Berhad",
+    //   "Metronic Global Bhd",
+    //   "Lambo Group Berhad",
+    //   "NetX Holdings Berhad",
+    // ],
 
-    sectors: [
-      "Footwear",
-      "Building Materials/Products",
-      "Software",
-      "Computer Services",
-      "Consumer Goods",
-      "Precision Products",
-      "Industrial Electronics",
-      "Investment Advisors",
-      "Technical Services",
-      "Restaurants",
-      "Forestry & Wood Products",
-      "Industrial Machinery",
-      "Water Transport/Shipping",
-      "Wireless Telecommunications Services",
-    ],
-    industries: [
-      "Consumer Goods",
-      "Real Estate/Construction",
-      "Technology",
-      "Business/Consumer Services",
-      "Telecommunications Services",
-      "Food Products",
-      "Financial Services",
-      "Leisure/Arts/Hospitality",
-      "Basic Materials/Resources",
-      "Industrial Goods",
-      "Transportation/Logistics",
-    ],
+    // sectors: [
+    //   "Footwear",
+    //   "Building Materials/Products",
+    //   "Software",
+    //   "Computer Services",
+    //   "Consumer Goods",
+    //   "Precision Products",
+    //   "Industrial Electronics",
+    //   "Investment Advisors",
+    //   "Technical Services",
+    //   "Restaurants",
+    //   "Forestry & Wood Products",
+    //   "Industrial Machinery",
+    //   "Water Transport/Shipping",
+    //   "Wireless Telecommunications Services",
+    // ],
+    // industries: [
+    //   "Consumer Goods",
+    //   "Real Estate/Construction",
+    //   "Technology",
+    //   "Business/Consumer Services",
+    //   "Telecommunications Services",
+    //   "Food Products",
+    //   "Financial Services",
+    //   "Leisure/Arts/Hospitality",
+    //   "Basic Materials/Resources",
+    //   "Industrial Goods",
+    //   "Transportation/Logistics",
+    // ],
     peratios: ["Below 50M", "Above 50M"],
     employees: ["Below 500", "Above 500"],
     viz: {},
   }),
-
+  mounted() {
+    this.companylist();
+    this.sectorlist();
+    this.industrylist();
+    this.directorlist();
+    this.placelist();
+  },
   methods: {
-    // limiter(e) {
-    //   if (e.length > 2) {
-    //     console.log(" you can only select two", e);
-    //     e.pop();
-    //   }
-    // },
+    async companylist() {
+      var companyArr = [];
+      var driver = neo4j.driver(
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+      );
+      var session = driver.session();
+      //var name = this.name.toLowerCase();
+
+      session
+        .run("MATCH (n:Company) RETURN n")
+        .then(function (result) {
+          result.records.forEach(function (record) {
+            companyArr.push({
+              name: record._fields[0].properties.name,
+              ticker: record._fields[0].properties.ticker,
+            });
+            session.close();
+          });
+        })
+
+        .catch(function (err) {
+          console.log(err, "hhbj");
+        });
+      this.companies = companyArr;
+      console.log(this.company);
+    },
+    async sectorlist() {
+      var companyArr = [];
+      var driver = neo4j.driver(
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+      );
+      var session = driver.session();
+      //var name = this.name.toLowerCase();
+
+      session
+        .run("MATCH (n:Sector) RETURN n")
+        .then(function (result) {
+          result.records.forEach(function (record) {
+            companyArr.push({
+              sector: record._fields[0].properties.sector,
+            });
+            session.close();
+          });
+        })
+
+        .catch(function (err) {
+          console.log(err, "hhbj");
+        });
+      this.sectors = companyArr;
+      
+    },
+    async industrylist() {
+      var companyArr = [];
+      var driver = neo4j.driver(
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+      );
+      var session = driver.session();
+      //var name = this.name.toLowerCase();
+
+      session
+        .run("MATCH (n:Industry) RETURN n")
+        .then(function (result) {
+          result.records.forEach(function (record) {
+            companyArr.push({
+              industry: record._fields[0].properties.industry,
+            });
+            session.close();
+          });
+        })
+
+        .catch(function (err) {
+          console.log(err, "hhbj");
+        });
+      this.industries = companyArr;
+     
+    },
+    async directorlist() {
+      var companyArr = [];
+      var driver = neo4j.driver(
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+      );
+      var session = driver.session();
+      //var name = this.name.toLowerCase();
+
+      session
+        .run("MATCH (n:Director) RETURN n")
+        .then(function (result) {
+          result.records.forEach(function (record) {
+            companyArr.push({
+              director: record._fields[0].properties.director,
+            });
+            session.close();
+          });
+        })
+
+        .catch(function (err) {
+          console.log(err, "hhbj");
+        });
+      this.directors = companyArr;
+     
+    },
+     async placelist() {
+      var companyArr = [];
+      var driver = neo4j.driver(
+        "neo4j://5c3575e8.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+      );
+      var session = driver.session();
+      //var name = this.name.toLowerCase();
+
+      session
+        .run("MATCH (n:Location) RETURN n")
+        .then(function (result) {
+          result.records.forEach(function (record) {
+            companyArr.push({
+              state: record._fields[0].properties.state,
+              city: record._fields[0].properties.city,
+            });
+            session.close();
+          });
+        })
+
+        .catch(function (err) {
+          console.log(err, "hhbj");
+        });
+      this.places = companyArr;
+      console.log(this.company);
+    },
+
     CompanyOversea() {
       console.log(this.search);
       var search = this.search.toLowerCase();
@@ -401,6 +561,9 @@ export default {
           Employee: {
             caption: "employee",
           },
+          Location: {
+            caption: "state"
+          }
         },
         relationships: {
           DIRECTED_BY: {
@@ -424,12 +587,15 @@ export default {
           PERATIO_OF: {
             thickness: "count",
           },
+           PRINCIPAL_PLACE: {
+            thickness: "count",
+          },
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
           "MATCH p=(Company {name: '" +
           search +
-          "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF]->() RETURN p ",
+          "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF|PRINCIPAL_PLACE]->() RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -439,7 +605,7 @@ export default {
       this.price1 = this.rangePrice[0];
       this.price2 = this.rangePrice[1];
       var config = {
-        // encrypted: "ENCRYPTION_ON",
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -590,6 +756,41 @@ export default {
         initial_cypher:
           "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industry: '" +
           industry +
+          "'}) RETURN p  ",
+      };
+
+      var viz = new NeoVis.default(config);
+      console.log(this.industry);
+      viz.render();
+    },
+     placeRe() {
+      var place = this.place.toLowerCase();
+      var config = {
+        encrypted: "ENCRYPTION_ON",
+        container_id: "viz",
+        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_user: "neo4j",
+        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        labels: {
+          Company: {
+            caption: "ticker",
+          },
+          Location: {
+            caption: "state",
+          },
+        },
+        relationships: {
+          INDUSTRALIZE_IN: {
+            thickness: "count",
+          },
+           PRINCIPAL_PLACE: {
+            thickness: "count",
+          },
+        },
+        //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
+        initial_cypher:
+          "MATCH p=(Company)-[r:PRINCIPAL_PLACE]->(Location {state: '" +
+          place +
           "'}) RETURN p  ",
       };
 
@@ -782,6 +983,9 @@ export default {
           Employee: {
             caption: "employee",
           },
+             Location: {
+            caption: "state",
+          },
         },
         relationships: {
           DIRECTED_BY: {
@@ -803,6 +1007,9 @@ export default {
             thickness: "count",
           },
           PERATIO_OF: {
+            thickness: "count",
+          },
+           PRINCIPAL_PLACE: {
             thickness: "count",
           },
         },
@@ -837,10 +1044,9 @@ export default {
       }
     },
     clearGraph() {
-        document.getElementById("viz").reset();
+      document.getElementById("viz").reset();
     },
   },
-
 };
 </script>
 <style scoped>

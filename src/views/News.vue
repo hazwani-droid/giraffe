@@ -2,25 +2,37 @@
 <template>
   <div>
     <v-container>
+      <v-alert
+        class="font-italic text-center"
+        border="left"
+        color="accent lighten-2"
+        dark
+        type="info"
+      >
+        <h3>
+          Please be noted that the articles are mostly taken from the liable sources
+          and based on the popularity of the keywords.
+        </h3>
+      </v-alert>
       <v-row no-gutters>
         <v-col md="6">
           <div class="filters">
-            <v-btn class="text-capitalize" outlined @click="filter1">
+            <v-btn class="text-capitalize ma-2" outlined @click="filter1">
               Technology
             </v-btn>
-            <v-btn class="text-capitalize" outlined @click="filter2">
+            <v-btn class="text-capitalize ma-2" outlined @click="filter2">
               Business
             </v-btn>
-            <v-btn class="text-capitalize" outlined @click="filter3">
-              Economy
-            </v-btn>
-            <v-btn class="text-capitalize" outlined @click="filter4">
+            <v-btn class="text-capitalize ma-2" outlined @click="filter3">
+              Economy </v-btn
+            ><br />
+            <v-btn class="text-capitalize ma-2" outlined @click="filter4">
               Politics
             </v-btn>
-            <v-btn class="text-capitalize" outlined @click="filter5">
+            <v-btn class="text-capitalize ma-2" outlined @click="filter5">
               Medical
             </v-btn>
-            <v-btn class="text-capitalize" outlined @click="filter6">
+            <v-btn class="text-capitalize ma-2" outlined @click="filter6">
               Social
             </v-btn>
             <script
@@ -523,7 +535,7 @@ export default {
 
           sortable: false,
         },
-        { text: "Keyword", value: "keyword", sortable: false },
+       
         { text: "Source", value: "source", sortable: false },
       ];
     },
