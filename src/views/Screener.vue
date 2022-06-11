@@ -1047,14 +1047,14 @@ export default {
         console.log("no purpose");
       }
     },
-    async clearGraph() {
+     clearGraph() {
       console.log("printing..");
       const el = this.$refs.printcontent;
 
       const options = {
         type: "dataURL",
       };
-      const printCanvas =  await html2canvas(el, options);
+      const printCanvas =   html2canvas(el, options);
 
       const link = document.createElement("a");
       link.setAttribute("download", "Graph.png");
