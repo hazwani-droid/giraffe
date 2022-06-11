@@ -31,7 +31,7 @@
               ></v-text-field>
 
               <v-select
-                label="Principal place of businessn (State)"
+                label="Principal place of business (State)"
                 v-model="state"
                 color="blue accent-3"
                 required
@@ -39,7 +39,7 @@
                 :rules="stringRules"
               ></v-select>
               <v-text-field
-                label="Principal place of businessn (City)"
+                label="Principal place of business (City)"
                 v-model="city"
                 color="blue accent-3"
                 required
