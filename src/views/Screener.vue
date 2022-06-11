@@ -224,17 +224,18 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark class="text-capitalize" v-if="clearGraph">
-                    Clear graph
+                  <v-btn dark class="text-capitalize" @click="clearGraph">
+                    Download graph as image
                   </v-btn>
                 </v-col>
 
                 <v-divider class="my-4"></v-divider>
+              
                 <script
                   type="application/javascript"
                   src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"
                 ></script>
-                <div id="viz">
+                <div id="viz" ref="printcontent">
                   <v-row>
                     <v-col cols="12">
                       <div class="py-4 searchbar">
@@ -262,8 +263,10 @@
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-<script>
+<script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+<script >
 import neo4j from "neo4j-driver";
+import html2canvas from 'html2canvas';
 export default {
   data: () => ({
     search: "",
@@ -391,6 +394,7 @@ export default {
     this.industrylist();
     this.directorlist();
     this.placelist();
+    
   },
   methods: {
     async companylist() {
@@ -953,7 +957,7 @@ export default {
       var comp6 = compRe[5];
 
       var config = {
-        encrypted: "ENCRYPTION_ON",
+       // encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -1043,8 +1047,28 @@ export default {
         console.log("no purpose");
       }
     },
-    clearGraph() {
-      document.getElementById("viz").reset();
+    async clearGraph() {
+      console.log("printing..");
+      const el = this.$refs.printcontent;
+
+      const options = {
+        type: "dataURL",
+      };
+      const printCanvas =  await html2canvas(el, options);
+
+      const link = document.createElement("a");
+      link.setAttribute("download", "Graph.png");
+      link.setAttribute(
+        "href",
+        printCanvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream")
+      );
+      link.click();
+
+      console.log("done");
+ 
+
     },
   },
 };
