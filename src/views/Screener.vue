@@ -957,7 +957,7 @@ export default {
       var comp6 = compRe[5];
 
       var config = {
-       // encrypted: "ENCRYPTION_ON",
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
