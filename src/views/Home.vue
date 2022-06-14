@@ -7,7 +7,7 @@
             dark
             gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
             height="500px"
-            src="images/graph.jpg"
+            src="../images/graph.jpg"
         >
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column">
