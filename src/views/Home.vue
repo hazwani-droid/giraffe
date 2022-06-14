@@ -7,7 +7,7 @@
             dark
             gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
             height="500px"
-            src="https://github.com/hazwani-droid/giraffe/blob/9c5a860aeb3051d735b0646cdfe49b9094e3058a/images/graph.jpg"
+            src="images/graph.jpg"
         >
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column">
