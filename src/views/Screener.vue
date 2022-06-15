@@ -438,7 +438,7 @@ export default {
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
-              sector: record._fields[0].properties.sector,
+              sector: record._fields[0].properties.sectorType,
             });
             session.close();
           });
@@ -464,7 +464,7 @@ export default {
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
-              industry: record._fields[0].properties.industry,
+              industry: record._fields[0].properties.industryType,
             });
             session.close();
           });
@@ -490,7 +490,7 @@ export default {
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
-              director: record._fields[0].properties.director,
+              director: record._fields[0].properties.name,
             });
             session.close();
           });
@@ -545,25 +545,25 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "director",
+            caption: "name",
           },
           Sector: {
-            caption: "sector",
+            caption: "sectorType",
           },
           Industry: {
-            caption: "industry",
+            caption: "industryType",
           },
           MarketCap: {
-            caption: "marketCap",
+            caption: "marketValue",
           },
           StockPrice: {
-            caption: "stockPrice",
+            caption: "stockValue",
           },
           Peratio: {
-            caption: "peRatio",
+            caption: "peratioValue",
           },
           Employee: {
-            caption: "employee",
+            caption: "empCount",
           },
           Location: {
             caption: "state"
@@ -579,7 +579,7 @@ export default {
           STOCKPRICE_OF: {
             thickness: "count",
           },
-          SECTORED_IN: {
+          SECTORS_IN: {
             thickness: "count",
           },
           MARKETCAP_IS: {
@@ -591,7 +591,7 @@ export default {
           PERATIO_OF: {
             thickness: "count",
           },
-           PRINCIPAL_PLACE: {
+           LOCATED_AT: {
             thickness: "count",
           },
         },
@@ -599,7 +599,7 @@ export default {
         initial_cypher:
           "MATCH p=(Company {name: '" +
           search +
-          "'})-[r:DIRECTED_BY|SECTORED_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF|PRINCIPAL_PLACE]->() RETURN p ",
+          "'})-[r:DIRECTED_BY|SECTORS_IN|INDUSTRALIZE_IN|MARKETCAP_IS|STOCKPRICE_OF|HAS_EMPLOYEE|PERATIO_OF|LOCATED_AT]->() RETURN p ",
       };
 
       var viz = new NeoVis.default(config);
@@ -609,7 +609,7 @@ export default {
       this.price1 = this.rangePrice[0];
       this.price2 = this.rangePrice[1];
       var config = {
-        encrypted: "ENCRYPTION_ON",
+       encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -619,7 +619,7 @@ export default {
             caption: "ticker",
           },
           StockPrice: {
-            caption: "stockPrice",
+            caption: "stockValue",
           },
         },
         relationships: {
@@ -629,9 +629,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b:StockPrice) WHERE b.stockPrice >= " +
+          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b:StockPrice) WHERE b.stockValue >= " +
           this.price1 +
-          " AND b.stockPrice <= " +
+          " AND b.stockValue <= " +
           this.price2 +
           " RETURN a,r,b",
       };
@@ -654,7 +654,7 @@ export default {
           },
 
           MarketCap: {
-            caption: "marketCap",
+            caption: "marketValue",
           },
         },
         relationships: {
@@ -664,9 +664,9 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b:MarketCap) WHERE b.marketCap >= " +
+          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b:MarketCap) WHERE b.marketValue >= " +
           this.market1 +
-          " AND b.marketCap <= " +
+          " AND b.marketValue <= " +
           this.market2 +
           " RETURN a,r,b",
       };
@@ -687,7 +687,7 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "director",
+            caption: "name",
           },
         },
         relationships: {
@@ -697,7 +697,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {director: '" +
+          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {name: '" +
           director +
           "'}) RETURN p ",
       };
@@ -717,17 +717,17 @@ export default {
             caption: "ticker",
           },
           Sector: {
-            caption: "sector",
+            caption: "sectorType",
           },
         },
         relationships: {
-          SECTORED_IN: {
+          SECTORS_IN: {
             thickness: "count",
           },
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:SECTORED_IN]->(Sector {sector: '" +
+          "MATCH p=(Company)-[r:SECTORS_IN]->(Sector {sectorType: '" +
           sector +
           "'}) RETURN p  ",
       };
@@ -748,7 +748,7 @@ export default {
             caption: "ticker",
           },
           Industry: {
-            caption: "industry",
+            caption: "industryType",
           },
         },
         relationships: {
@@ -758,7 +758,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industry: '" +
+          "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industryType: '" +
           industry +
           "'}) RETURN p  ",
       };
@@ -784,16 +784,14 @@ export default {
           },
         },
         relationships: {
-          INDUSTRALIZE_IN: {
-            thickness: "count",
-          },
-           PRINCIPAL_PLACE: {
+         
+           LOCATED_AT: {
             thickness: "count",
           },
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:PRINCIPAL_PLACE]->(Location {state: '" +
+          "MATCH p=(Company)-[r:LOCATED_AT]->(Location {state: '" +
           place +
           "'}) RETURN p  ",
       };
@@ -825,7 +823,7 @@ export default {
             caption: "ticker",
           },
           Peratio: {
-            caption: "peRatio",
+            caption: "peratioValue",
           },
         },
         relationships: {
@@ -835,7 +833,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peRatio >= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peratioValue >= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -855,7 +853,7 @@ export default {
           },
 
           Peratio: {
-            caption: "peRatio",
+            caption: "peratioValue",
           },
         },
         relationships: {
@@ -865,7 +863,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peRatio <= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peratioValue <= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -896,7 +894,7 @@ export default {
           },
 
           Employee: {
-            caption: "employee",
+            caption: "empCount",
           },
         },
         relationships: {
@@ -906,7 +904,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.employee >= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.empCount >= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -926,7 +924,7 @@ export default {
           },
 
           Employee: {
-            caption: "employee",
+            caption: "empCount",
           },
         },
         relationships: {
@@ -936,7 +934,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.employee <= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.empCount <= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -967,25 +965,25 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "director",
+            caption: "name",
           },
           Sector: {
-            caption: "sector",
+            caption: "sectorType",
           },
           Industry: {
-            caption: "industry",
+            caption: "industryType",
           },
           MarketCap: {
-            caption: "marketCap",
+            caption: "marketValue",
           },
           StockPrice: {
-            caption: "stockPrice",
+            caption: "stockValue",
           },
           Peratio: {
-            caption: "peRatio",
+            caption: "peratioValue",
           },
           Employee: {
-            caption: "employee",
+            caption: "empCount",
           },
              Location: {
             caption: "state",
@@ -1001,7 +999,7 @@ export default {
           STOCKPRICE_OF: {
             thickness: "count",
           },
-          SECTORED_IN: {
+          SECTORS_IN: {
             thickness: "count",
           },
           MARKETCAP_IS: {
@@ -1013,7 +1011,7 @@ export default {
           PERATIO_OF: {
             thickness: "count",
           },
-           PRINCIPAL_PLACE: {
+          LOCATED_AT: {
             thickness: "count",
           },
         },

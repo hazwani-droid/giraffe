@@ -213,7 +213,8 @@ export default {
 
     hasdel: false,
     update: "",
-
+   city:null,
+   state:null,
     name: null,
     ticker: null,
     industry: null,
@@ -277,21 +278,21 @@ export default {
             ticker +
             "', name: '" +
             name +
-            "'}) MERGE (d:Director {director: '" +
+            "'}) MERGE (d:Director {name: '" +
             director +
-            "'}) MERGE (c)-[:DIRECTED_BY]->(d) MERGE (j:Employee {employee:toInteger(" +
+            "'}) MERGE (c)-[:DIRECTED_BY]->(d) MERGE (j:Employee {empCount:toInteger(" +
             this.employee +
-            ")}) MERGE (c)-[:HAS_EMPLOYEE]->(j) MERGE (f:Industry {industry: '" +
+            ")}) MERGE (c)-[:HAS_EMPLOYEE]->(j) MERGE (f:Industry {industryType: '" +
             industry +
-            "'}) MERGE (c)-[:INDUSTRALIZE_IN]->(f) MERGE (h:MarketCap {marketCap:toInteger(" +
+            "'}) MERGE (c)-[:INDUSTRALIZE_IN]->(f) MERGE (h:MarketCap {marketValue:toInteger(" +
             this.marketCap +
-            ")}) MERGE (c)-[:MARKETCAP_IS]->(h) MERGE (k:Peratio {peRatio:toFloat(" +
+            ")}) MERGE (c)-[:MARKETCAP_IS]->(h) MERGE (k:Peratio {peratioValue:toFloat(" +
             this.peratio +
-            ")}) MERGE (c)-[:PERATIO_OF]->(k) MERGE (b:Sector {sector: '" +
+            ")}) MERGE (c)-[:PERATIO_OF]->(k) MERGE (b:Sector {sectorType: '" +
             sector +
-            "'}) MERGE (c)-[:SECTORED_IN]->(b)  MERGE (m:StockPrice {stockPrice:toFloat(" +
+            "'}) MERGE (c)-[:SECTORS_IN]->(b)  MERGE (m:StockPrice {stockValue:toFloat(" +
             this.stockPrice +
-            ")}) MERGE (c)-[:STOCKPRICE_OF]->(m) MERGE (q:Location {state:'" +
+            ")}) MERGE (c)-[:LOCATED_AT]->(m) MERGE (q:Location {state:'" +
             state +
             "', city: '" +
             city +
