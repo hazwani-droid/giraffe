@@ -224,7 +224,7 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                  <v-btn dark class="text-capitalize" @click="clearGraph">
+                  <v-btn dark class="text-capitalize" @click="downloadGraph">
                     Download graph as image
                   </v-btn>
                 </v-col>
@@ -490,7 +490,7 @@ export default {
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
-              director: record._fields[0].properties.name,
+              directorName: record._fields[0].properties.directorName,
             });
             session.close();
           });
@@ -545,7 +545,7 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "name",
+            caption: "directorName",
           },
           Sector: {
             caption: "sectorType",
@@ -687,7 +687,7 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "name",
+            caption: "directorName",
           },
         },
         relationships: {
@@ -697,7 +697,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {name: '" +
+          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {directorName: '" +
           director +
           "'}) RETURN p ",
       };
@@ -965,7 +965,7 @@ export default {
             caption: "ticker",
           },
           Director: {
-            caption: "name",
+            caption: "directorName",
           },
           Sector: {
             caption: "sectorType",
@@ -1045,7 +1045,7 @@ export default {
         console.log("no purpose");
       }
     },
-     clearGraph() {
+     downloadGraph() {
       console.log("printing..");
       const el = this.$refs.printcontent;
 

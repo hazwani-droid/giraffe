@@ -278,7 +278,7 @@ export default {
             ticker +
             "', name: '" +
             name +
-            "'}) MERGE (d:Director {name: '" +
+            "'}) MERGE (d:Director {directorName: '" +
             director +
             "'}) MERGE (c)-[:DIRECTED_BY]->(d) MERGE (j:Employee {empCount:toInteger(" +
             this.employee +
