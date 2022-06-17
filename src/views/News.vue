@@ -241,9 +241,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",
@@ -276,9 +276,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",
@@ -312,9 +312,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",
@@ -348,9 +348,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",
@@ -383,9 +383,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+      server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",
@@ -418,9 +418,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           News: {
             caption: "code",

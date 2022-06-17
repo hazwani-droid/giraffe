@@ -400,8 +400,8 @@ export default {
     async companylist() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+        "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -427,8 +427,8 @@ export default {
     async sectorlist() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+          "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -453,8 +453,8 @@ export default {
     async industrylist() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+         "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -479,8 +479,8 @@ export default {
     async directorlist() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+         "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -505,8 +505,8 @@ export default {
      async placelist() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+         "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -537,9 +537,9 @@ export default {
         encrypted: "ENCRYPTION_ON",
         search: this.search,
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -611,9 +611,9 @@ export default {
       var config = {
        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -645,9 +645,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -679,9 +679,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -709,9 +709,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -740,9 +740,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -772,9 +772,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -815,9 +815,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -844,9 +844,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -885,9 +885,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+       server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -915,9 +915,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",
@@ -957,9 +957,9 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-        server_url: "neo4j://5c3575e8.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
-        server_password: "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM",
+        server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
           Company: {
             caption: "ticker",

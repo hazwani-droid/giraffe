@@ -258,8 +258,8 @@ export default {
   methods: {
     submitRegister() {
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+         "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       var name = this.name.toLowerCase();
@@ -312,8 +312,8 @@ export default {
     async updateRe() {
       var companyArr = [];
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+        "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
@@ -346,8 +346,8 @@ export default {
 
     deleteCom() {
       var driver = neo4j.driver(
-        "neo4j://5c3575e8.databases.neo4j.io:7687",
-        neo4j.auth.basic("neo4j", "DxjItYHh-BDI_QedX3W-Hs2uV8YlP7YZ6pB_ggowcCM")
+        "neo4j://46243086.databases.neo4j.io:7687",
+        neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       var update = this.update.toLowerCase();
