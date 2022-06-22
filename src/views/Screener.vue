@@ -230,7 +230,7 @@
                 </v-col>
 
                 <v-divider class="my-4"></v-divider>
-              
+
                 <script
                   type="application/javascript"
                   src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"
@@ -240,7 +240,7 @@
                     <v-col cols="12">
                       <div class="py-4 searchbar">
                         <v-alert
-                          class="font-italic text-center"
+                          class="font-italic text-center justify-left"
                           border="left"
                           colored-border
                           color="accent"
@@ -263,20 +263,20 @@
 </template>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-<script  type="application/javascript" src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.7/dist/html2canvas.min.js"></script>
+
 <script >
 import neo4j from "neo4j-driver";
-import html2canvas from 'html2canvas';
+import html2canvas from "html2canvas";
 export default {
   data: () => ({
     search: "",
-    place:"",
+    place: "",
     selected: true,
     companies: [],
     sectors: [],
     industries: [],
     directors: [],
-    places:[],
+    places: [],
     drawer: true,
     rangePrice: [-20, 70],
     price1: "",
@@ -290,101 +290,7 @@ export default {
     peratio: "",
     employee: "",
     director: "",
-    // directors: [
-    //   "Pui Hold Ho",
-    //   "Yew Khid Wong",
-    //   "Khai Shyuan Kua",
-    //   "Yew Kee Roy Ho",
-    //   "Ng Kok Heng",
-    //   "Siew Wei Mak",
-    //   "Lee Aun Choong",
-    //   "Ming Chang Lim",
-    //   "Soo Chye Yu",
-    //   "Woon Chet Chai",
-    //   "Huei Ping Chen",
-    //   "Chow Huat Pang",
-    //   "Chor How Tan",
-    //   "Wai Keong Hoo",
-    //   "Guo Hua Zhuang",
-    //   "Sik Eek Tan",
-    // ],
-    // compRelation: [
-    //   "Xidelang Holdings LTD",
-    //   "Seacera Group Berhad",
-    //   "DGB Asia Berhad",
-    //   "Key Alliance Group Berhad",
-    //   "XOX Berhad",
-    //   "M3 Technologies (Asia) Berhad",
-    //   "Saudee Group Berhad",
-    //   "Green Ocean Corporation Berhad",
-    //   "AT Systemization Berhad",
-    //   "Trive Property Group Berhad",
-    //   "Fintec Global Berhad",
-    //   "Focus Dynamics Group Berhad",
-    //   "Oversea Enterprise Bhd",
-    //   "Anzo Holding Bhd",
-    //   "mTouche Technology Bhd",
-    //   "Sanichi Technology Berhad",
-    //   "PDZ Holdings Berhad",
-    //   "MNC Wireless Berhad",
-    //   "Metronic Global Bhd",
-    //   "Lambo Group Berhad",
-    //   "NetX Holdings Berhad",
-    // ],
-    // value: [
-    //   "Xidelang Holdings LTD",
-    //   "Seacera Group Berhad",
-    //   "DGB Asia Berhad",
-    //   "Key Alliance Group Berhad",
-    //   "XOX Berhad",
-    //   "M3 Technologies (Asia) Berhad",
-    //   "Saudee Group Berhad",
-    //   "Green Ocean Corporation Berhad",
-    //   "AT Systemization Berhad",
-    //   "Trive Property Group Berhad",
-    //   "Fintec Global Berhad",
-    //   "Focus Dynamics Group Berhad",
-    //   "Oversea Enterprise Bhd",
-    //   "Anzo Holding Bhd",
-    //   "mTouche Technology Bhd",
-    //   "Sanichi Technology Berhad",
-    //   "PDZ Holdings Berhad",
-    //   "MNC Wireless Berhad",
-    //   "Metronic Global Bhd",
-    //   "Lambo Group Berhad",
-    //   "NetX Holdings Berhad",
-    // ],
-
-    // sectors: [
-    //   "Footwear",
-    //   "Building Materials/Products",
-    //   "Software",
-    //   "Computer Services",
-    //   "Consumer Goods",
-    //   "Precision Products",
-    //   "Industrial Electronics",
-    //   "Investment Advisors",
-    //   "Technical Services",
-    //   "Restaurants",
-    //   "Forestry & Wood Products",
-    //   "Industrial Machinery",
-    //   "Water Transport/Shipping",
-    //   "Wireless Telecommunications Services",
-    // ],
-    // industries: [
-    //   "Consumer Goods",
-    //   "Real Estate/Construction",
-    //   "Technology",
-    //   "Business/Consumer Services",
-    //   "Telecommunications Services",
-    //   "Food Products",
-    //   "Financial Services",
-    //   "Leisure/Arts/Hospitality",
-    //   "Basic Materials/Resources",
-    //   "Industrial Goods",
-    //   "Transportation/Logistics",
-    // ],
-    peratios: ["Below 50M", "Above 50M"],
+    peratios: ["Below 50 Million", "Above 50 Million"],
     employees: ["Below 500", "Above 500"],
     viz: {},
   }),
@@ -394,7 +300,6 @@ export default {
     this.industrylist();
     this.directorlist();
     this.placelist();
-    
   },
   methods: {
     async companylist() {
@@ -427,14 +332,14 @@ export default {
     async sectorlist() {
       var companyArr = [];
       var driver = neo4j.driver(
-          "neo4j://46243086.databases.neo4j.io:7687",
+        "neo4j://46243086.databases.neo4j.io:7687",
         neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
 
       session
-        .run("MATCH (n:Sector) RETURN n")
+        .run("MATCH (n:SectorType) RETURN n")
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
@@ -447,20 +352,20 @@ export default {
         .catch(function (err) {
           console.log(err, "hhbj");
         });
+      console.log(companyArr);
       this.sectors = companyArr;
-      
     },
     async industrylist() {
       var companyArr = [];
       var driver = neo4j.driver(
-         "neo4j://46243086.databases.neo4j.io:7687",
+        "neo4j://46243086.databases.neo4j.io:7687",
         neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
 
       session
-        .run("MATCH (n:Industry) RETURN n")
+        .run("MATCH (n:IndustryType) RETURN n")
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
@@ -474,23 +379,22 @@ export default {
           console.log(err, "hhbj");
         });
       this.industries = companyArr;
-     
     },
     async directorlist() {
       var companyArr = [];
       var driver = neo4j.driver(
-         "neo4j://46243086.databases.neo4j.io:7687",
+        "neo4j://46243086.databases.neo4j.io:7687",
         neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
       //var name = this.name.toLowerCase();
 
       session
-        .run("MATCH (n:Director) RETURN n")
+        .run("MATCH (n:DirectorName) RETURN n")
         .then(function (result) {
           result.records.forEach(function (record) {
             companyArr.push({
-              directorName: record._fields[0].properties.directorName,
+              director: record._fields[0].properties.directorName,
             });
             session.close();
           });
@@ -500,12 +404,11 @@ export default {
           console.log(err, "hhbj");
         });
       this.directors = companyArr;
-     
     },
-     async placelist() {
+    async placelist() {
       var companyArr = [];
       var driver = neo4j.driver(
-         "neo4j://46243086.databases.neo4j.io:7687",
+        "neo4j://46243086.databases.neo4j.io:7687",
         neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
@@ -532,7 +435,7 @@ export default {
 
     CompanyOversea() {
       console.log(this.search);
-      var search = this.search.toLowerCase();
+      var search = this.search;
       var config = {
         encrypted: "ENCRYPTION_ON",
         search: this.search,
@@ -566,8 +469,8 @@ export default {
             caption: "empCount",
           },
           Location: {
-            caption: "state"
-          }
+            caption: "state",
+          },
         },
         relationships: {
           DIRECTED_BY: {
@@ -591,7 +494,7 @@ export default {
           PERATIO_OF: {
             thickness: "count",
           },
-           LOCATED_AT: {
+          LOCATED_AT: {
             thickness: "count",
           },
         },
@@ -609,9 +512,9 @@ export default {
       this.price1 = this.rangePrice[0];
       this.price2 = this.rangePrice[1];
       var config = {
-       encrypted: "ENCRYPTION_ON",
+        encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -629,7 +532,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b:StockPrice) WHERE b.stockValue >= " +
+          "MATCH (a:Company)-[r:STOCKPRICE_OF]->(b:StockValue) WHERE b.stockValue >= " +
           this.price1 +
           " AND b.stockValue <= " +
           this.price2 +
@@ -664,7 +567,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b:MarketCap) WHERE b.marketValue >= " +
+          "MATCH (a:Company)-[r:MARKETCAP_IS]->(b:MarketValue) WHERE b.marketValue >= " +
           this.market1 +
           " AND b.marketValue <= " +
           this.market2 +
@@ -675,11 +578,11 @@ export default {
       viz.render();
     },
     directorRe() {
-      var director = this.director.toLowerCase();
+      var director = this.director;
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-         server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -697,7 +600,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:DIRECTED_BY]->(Director {directorName: '" +
+          "MATCH p=(Company)-[r:DIRECTED_BY]->(DirectorName {directorName: '" +
           director +
           "'}) RETURN p ",
       };
@@ -705,11 +608,11 @@ export default {
       viz.render();
     },
     sectorRe() {
-      var sector = this.sector.toLowerCase();
+      var sector = this.sector;
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -727,7 +630,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:SECTORS_IN]->(Sector {sectorType: '" +
+          "MATCH p=(Company)-[r:SECTORS_IN]->(SectorType {sectorType: '" +
           sector +
           "'}) RETURN p  ",
       };
@@ -736,11 +639,11 @@ export default {
       viz.render();
     },
     industryRe() {
-      var industry = this.industry.toLowerCase();
+      var industry = this.industry;
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -758,7 +661,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(Industry {industryType: '" +
+          "MATCH p=(Company)-[r:INDUSTRALIZE_IN]->(IndustryType {industryType: '" +
           industry +
           "'}) RETURN p  ",
       };
@@ -767,8 +670,8 @@ export default {
       console.log(this.industry);
       viz.render();
     },
-     placeRe() {
-      var place = this.place.toLowerCase();
+    placeRe() {
+      var place = this.place;
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
@@ -784,8 +687,7 @@ export default {
           },
         },
         relationships: {
-         
-           LOCATED_AT: {
+          LOCATED_AT: {
             thickness: "count",
           },
         },
@@ -815,7 +717,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-         server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -833,7 +735,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peratioValue >= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:PeratioValue) WHERE b.peratioValue >= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -844,7 +746,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-         server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -863,7 +765,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:PERATIO_OF]->(b:Peratio) WHERE b.peratioValue <= 50 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:PERATIO_OF]->(b:PeratioValue) WHERE b.peratioValue <= 50 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -885,7 +787,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -904,7 +806,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.empCount >= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:EmployeeCount) WHERE b.empCount >= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -934,7 +836,7 @@ export default {
         },
         //initial_cypher: "MATCH (c)-[r]->(d) RETURN c,r,d"
         initial_cypher:
-          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:Employee) WHERE b.empCount <= 500 RETURN a,r,b  ",
+          "MATCH (a:Company)-[r:HAS_EMPLOYEE]->(b:EmployeeCount) WHERE b.empCount <= 500 RETURN a,r,b  ",
       };
 
       var viz = new NeoVis.default(config);
@@ -955,7 +857,7 @@ export default {
       var comp6 = compRe[5];
 
       var config = {
-        encrypted: "ENCRYPTION_ON",
+        //encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
@@ -964,28 +866,28 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Director: {
+          DirectorName: {
             caption: "directorName",
           },
-          Sector: {
+          SectorType: {
             caption: "sectorType",
           },
-          Industry: {
+          IndustryType: {
             caption: "industryType",
           },
-          MarketCap: {
+          MarketValue: {
             caption: "marketValue",
           },
-          StockPrice: {
+          StockValue: {
             caption: "stockValue",
           },
-          Peratio: {
+          PeratioValue: {
             caption: "peratioValue",
           },
-          Employee: {
+          EmployeeCount: {
             caption: "empCount",
           },
-             Location: {
+          Location: {
             caption: "state",
           },
         },
@@ -1045,38 +947,36 @@ export default {
         console.log("no purpose");
       }
     },
-     downloadGraph() {
-      console.log("printing..");
-      const el = this.$refs.printcontent;
 
-      const options = {
-        type: "dataURL",
-      };
-      const printCanvas =   html2canvas(el, options);
+    downloadGraph() {
+      console.log("printing..");
+
+      let div = document.getElementById("viz");
 
       const link = document.createElement("a");
-      link.setAttribute("download", "Graph.png");
-      link.setAttribute(
-        "href",
-        printCanvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream")
-      );
-      link.click();
+      link.setAttribute("download", "download.png");
+      html2canvas(div).then(function (canvas) {
+        link.setAttribute(
+          "href",
+          canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream")
+        );
+        link.click();
 
-      console.log("done");
- 
-
+        console.log("done");
+      });
     },
   },
 };
 </script>
 <style scoped>
 #viz {
-  width: 1100px;
+  width: 920px;
   height: 900px;
-  margin-left: 50px;
+  margin-left: 200px;
   text-transform: lowercase;
+  border: 2px solid #d3d3d3;
 }
 
 .filter-font {

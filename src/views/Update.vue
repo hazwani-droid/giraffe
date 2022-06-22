@@ -35,7 +35,7 @@
                 v-model="state"
                 color="blue accent-3"
                 required
-                  :items="states"
+                :items="states"
                 :rules="stringRules"
               ></v-select>
               <v-text-field
@@ -49,7 +49,7 @@
                 label="No. of Employee"
                 color="blue accent-3"
                 v-model="employee"
-                :rules="numberRules"
+                :rules="intnumberRules"
                 required
               ></v-text-field>
 
@@ -58,7 +58,7 @@
                 color="blue accent-3"
                 v-model="stockPrice"
                 required
-                :rules="numberRules"
+                :rules="floatnumberRules"
               ></v-text-field>
 
               <v-text-field
@@ -66,7 +66,7 @@
                 color="blue accent-3"
                 v-model="marketCap"
                 required
-                :rules="numberRules"
+                :rules="floatnumberRules"
               ></v-text-field>
 
               <v-text-field
@@ -98,7 +98,7 @@
                 color="blue accent-3"
                 v-model="peratio"
                 required
-                :rules="numberRules"
+                :rules="floatnumberRules"
               ></v-text-field>
             </v-form>
 
@@ -121,7 +121,7 @@
             <v-dialog v-model="dialog3" max-width="400px">
               <v-card>
                 <v-card-title class="justify-center">
-                  <p>Company Update Form</p>
+                  <p>Company Delete Form</p>
                 </v-card-title>
                 <v-card-text>
                   <v-select
@@ -213,8 +213,8 @@ export default {
 
     hasdel: false,
     update: "",
-   city:null,
-   state:null,
+    city: null,
+    state: null,
     name: null,
     ticker: null,
     industry: null,
@@ -225,7 +225,7 @@ export default {
     stockPrice: null,
     director: null,
     company: [],
-    states:[
+    states: [
       "selangor",
       "negeri sembilan",
       "johor",
@@ -239,7 +239,6 @@ export default {
       "terengganu",
       "pahang",
       "malacca",
-
     ],
     isOperationSuccess: false,
     validRegister: "",
@@ -247,9 +246,13 @@ export default {
       (v) => !!v || "This field is required",
       (v) => /^[A-Za-z- ]*$/i.test(v) || "Please exclude numbers",
     ],
-    numberRules: [
+    intnumberRules: [
       (v) => !!v || "This field is required",
-      (v) => /^(\+?[1-9 ]{1,5})$/.test(v) || "Only numbers are allowed",
+      (v) => /^(\+?[0-9 ]{1,6})$/.test(v) || "Only integer numbers are allowed",
+    ],
+    floatnumberRules: [
+      (v) => !!v || "This field is required",
+      (v) => /^[+-]?\d+(\.\d+)?$/.test(v) || "invalid value",
     ],
   }),
   mounted() {
@@ -258,7 +261,7 @@ export default {
   methods: {
     submitRegister() {
       var driver = neo4j.driver(
-         "neo4j://46243086.databases.neo4j.io:7687",
+        "neo4j://46243086.databases.neo4j.io:7687",
         neo4j.auth.basic("neo4j", "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc")
       );
       var session = driver.session();
@@ -267,8 +270,8 @@ export default {
       var industry = this.industry.toLowerCase();
       var sector = this.sector.toLowerCase();
       var director = this.director.toLowerCase();
-       var city = this.city.toLowerCase();
-        var state = this.state.toLowerCase();
+      var city = this.city.toLowerCase();
+      var state = this.state.toLowerCase();
 
       // // Get a session from the driver
       //   const session = this.$neo4j.getSession();
@@ -278,19 +281,19 @@ export default {
             ticker +
             "', name: '" +
             name +
-            "'}) MERGE (d:Director {directorName: '" +
+            "'}) MERGE (d:DirectorName {directorName: '" +
             director +
-            "'}) MERGE (c)-[:DIRECTED_BY]->(d) MERGE (j:Employee {empCount:toInteger(" +
+            "'}) MERGE (c)-[:DIRECTED_BY]->(d) MERGE (j:EmployeeCount {empCount:toInteger(" +
             this.employee +
-            ")}) MERGE (c)-[:HAS_EMPLOYEE]->(j) MERGE (f:Industry {industryType: '" +
+            ")}) MERGE (c)-[:HAS_EMPLOYEE]->(j) MERGE (f:IndustryType {industryType: '" +
             industry +
-            "'}) MERGE (c)-[:INDUSTRALIZE_IN]->(f) MERGE (h:MarketCap {marketValue:toInteger(" +
+            "'}) MERGE (c)-[:INDUSTRALIZE_IN]->(f) MERGE (h:MarketValue {marketValue:toFloat(" +
             this.marketCap +
-            ")}) MERGE (c)-[:MARKETCAP_IS]->(h) MERGE (k:Peratio {peratioValue:toFloat(" +
+            ")}) MERGE (c)-[:MARKETCAP_IS]->(h) MERGE (k:PeratioValue {peratioValue:toFloat(" +
             this.peratio +
-            ")}) MERGE (c)-[:PERATIO_OF]->(k) MERGE (b:Sector {sectorType: '" +
+            ")}) MERGE (c)-[:PERATIO_OF]->(k) MERGE (b:SectorType {sectorType: '" +
             sector +
-            "'}) MERGE (c)-[:SECTORS_IN]->(b)  MERGE (m:StockPrice {stockValue:toFloat(" +
+            "'}) MERGE (c)-[:SECTORS_IN]->(b)  MERGE (m:StockValue {stockValue:toFloat(" +
             this.stockPrice +
             ")}) MERGE (c)-[:LOCATED_AT]->(m) MERGE (q:Location {state:'" +
             state +
@@ -325,13 +328,6 @@ export default {
             companyArr.push({
               name: record._fields[0].properties.name,
               ticker: record._fields[0].properties.ticker,
-              // stockPrice:record._fields[0].properties.stockPrice,
-              // marketCap:record._fields[0].properties.marketCap,
-              // employee:record._fields[0].properties.employee,
-              // industry:record._fields[0].properties.industry,
-              // peratio:record._fields[0].properties.peratio,
-              // director:record._fields[0].properties.director,
-              // sector:record._fields[0].properties.sector,
             });
             session.close();
           });

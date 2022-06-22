@@ -10,8 +10,8 @@
         type="info"
       >
         <h3>
-          Please be noted that the articles are mostly taken from the liable sources
-          and based on the popularity of the keywords.
+          Please be noted that the articles are mostly taken from the liable
+          sources and based on the popularity of the keywords.
         </h3>
       </v-alert>
       <v-row no-gutters>
@@ -241,7 +241,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -276,7 +276,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-         server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -312,7 +312,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-       server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -383,7 +383,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-      server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -418,7 +418,7 @@ export default {
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
-         server_url: "neo4j://46243086.databases.neo4j.io:7687",
+        server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",
         server_password: "XIx343iBGlvTvANKgc32XuwQn-n6M1bH-OjhyGV7mlc",
         labels: {
@@ -474,51 +474,6 @@ export default {
         console.log("error", error);
       }
     },
-
-    // connect() {
-    //   return this.$neo4j
-    //     .connect(
-    //       this.protocol,
-    //       this.host,
-    //       this.port,
-    //       this.username,
-    //       this.password
-    //     )
-    //     .then((driver) => {
-    //       // Update the context of your app
-    //     });
-    // },
-    // driver() {
-    //   // Get a driver instance
-    //   return this.$neo4j.getDriver();
-    // },
-    // testQuery() {
-    //   // // Get a session from the driver
-    //   const session = this.$neo4j.getSession();
-
-    //   // Or you can just call this.$neo4j.run(cypher, params)
-    //   session
-    // .run("MATCH(n:News) RETURN n")
-    //     .then(function (result) {
-    //       var newsArr = [];
-    //       result.records.forEach(function (record) {
-    //         newsArr.push({
-    //           title: record._fields[0].properties.title,
-    //           keyword: record._fields[0].properties.keyword,
-    //         });
-
-    //       });
-
-    // //     })
-    //     .catch(function (err) {
-    //       console.log(err,"hhbj");
-    //     });
-
-    //     console.log(this.newArr)
-    // },
-    // // please(){
-    // //   return this.connect();
-    // // }
   },
   computed: {
     headers() {
@@ -535,7 +490,7 @@ export default {
 
           sortable: false,
         },
-       
+
         { text: "Source", value: "source", sortable: false },
       ];
     },
@@ -546,10 +501,11 @@ export default {
 
 <style scoped>
 #viz {
-  width: 500px;
+  width: 550px;
   height: 900px;
   border-color: #000;
   text-transform: lowercase;
+  border: 2px solid #d3d3d3;
 }
 
 /* .filters {
