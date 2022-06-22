@@ -7,7 +7,7 @@
             dark
             gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
             height="500px"
-            src="graph.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/stockneo-f9c14.appspot.com/o/graph.jpg?alt=media&token=a36972f0-9c33-4af4-b267-f5f5194abbba"
         >
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column">
@@ -56,7 +56,7 @@
                           class="elevation-2"
                           gradient="to top, rgba(25,32,72,.4), rgba(25,32,72,.0)"
                           height="200px"
-                          src="../images/neo4j.jpg"
+                          src="https://firebasestorage.googleapis.com/v0/b/stockneo-f9c14.appspot.com/o/neo4j.jpg?alt=media&token=6df6149b-c069-4ea9-a24c-aa36bd65f942"
                           style="border-radius: 16px"
                       >
                         
