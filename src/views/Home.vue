@@ -24,6 +24,11 @@
 
                 <div class="text-h6 pl-2">Your Stock Graph Partner!</div>
               </v-col>
+              <v-col class="d-flex align-right">
+               
+                <v-spacer></v-spacer>
+                <v-btn    to= "/Screener" class="text-capitalize " color="#1976D2">Get Started</v-btn>
+              </v-col>
             </v-row>
           </v-card-text>
         </v-img>
@@ -76,7 +81,7 @@
                         <div class="d-flex align-center">
                          
 
-                         <v-btn   color="primary" href="https://neo4j.com/use-cases/knowledge-graph/" target="_blank">View use cases</v-btn>
+                         <v-btn    class="text-capitalize"  color="primary" href="https://neo4j.com/use-cases/knowledge-graph/" target="_blank">View use cases</v-btn>
                         </div>
                       </v-card-text>
                     </v-card>
