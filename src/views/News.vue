@@ -40,7 +40,18 @@
               src="https://cdn.neo4jlabs.com/neovis.js/v1.5.0/neovis.js"
             ></script>
             <div>
-              <div id="viz"></div>
+              <div id="viz">
+                 <v-alert
+                          class="font-italic text-center justify-left"
+                          border="left"
+                          colored-border
+                          color="accent"
+                        >
+                          <h3>
+                            Please choose a filter to view the resulted news graphs!
+                          </h3>
+                        </v-alert>
+              </div>
             </div>
           </div>
         </v-col>

@@ -238,7 +238,7 @@
                 <div id="viz" ref="printcontent">
                   <v-row>
                     <v-col cols="12">
-                      <div class="py-4 searchbar">
+                      <div >
                         <v-alert
                           class="font-italic text-center justify-left"
                           border="left"
