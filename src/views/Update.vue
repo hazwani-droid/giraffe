@@ -62,7 +62,7 @@
               ></v-text-field>
 
               <v-text-field
-                label="Market Capitalization"
+                label="Market Capitalization (Millions)"
                 color="blue accent-3"
                 v-model="marketCap"
                 required
