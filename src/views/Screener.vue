@@ -439,7 +439,7 @@ export default {
       console.log(this.search);
       var search = this.search;
       var config = {
-       // encrypted: "ENCRYPTION_ON",
+        encrypted: "ENCRYPTION_ON",
         search: this.search,
         container_id: "viz",
         server_url: "neo4j://46243086.databases.neo4j.io:7687",
@@ -705,17 +705,18 @@ export default {
       viz.render();
     },
     peratioRe() {
-      console.log(this.peratio);
-      if (this.peratio == "Below 50M") {
+      
+      if (this.peratio == "Below 50 Million") {
         console.log(this.peratio);
         return this.peratioLessRee();
       }
-      if (this.peratio == "Above 50M") {
+      if (this.peratio == "Above 50 Million") {
         console.log(this.peratio);
         return this.peratioMoreRee();
       }
     },
     peratioMoreRee() {
+      
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
@@ -745,6 +746,7 @@ export default {
       viz.render();
     },
     peratioLessRee() {
+       
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
