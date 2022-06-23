@@ -224,7 +224,9 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
+                 
                   <v-btn dark class="text-capitalize" @click="downloadGraph">
+                     <v-icon>mdi-download</v-icon>
                     Download graph as image
                   </v-btn>
                 </v-col>
@@ -437,7 +439,7 @@ export default {
       console.log(this.search);
       var search = this.search;
       var config = {
-        encrypted: "ENCRYPTION_ON",
+       // encrypted: "ENCRYPTION_ON",
         search: this.search,
         container_id: "viz",
         server_url: "neo4j://46243086.databases.neo4j.io:7687",
@@ -447,25 +449,25 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Director: {
+          DirectorName: {
             caption: "directorName",
           },
-          Sector: {
+          SectorType: {
             caption: "sectorType",
           },
-          Industry: {
+          IndustryType: {
             caption: "industryType",
           },
-          MarketCap: {
+          MarketValue: {
             caption: "marketValue",
           },
-          StockPrice: {
+          StockValue: {
             caption: "stockValue",
           },
-          Peratio: {
+          PeratioValue: {
             caption: "peratioValue",
           },
-          Employee: {
+          EmployeeCount: {
             caption: "empCount",
           },
           Location: {
@@ -521,7 +523,7 @@ export default {
           Company: {
             caption: "ticker",
           },
-          StockPrice: {
+          StockValue: {
             caption: "stockValue",
           },
         },
@@ -556,7 +558,7 @@ export default {
             caption: "ticker",
           },
 
-          MarketCap: {
+          MarketValue: {
             caption: "marketValue",
           },
         },
@@ -589,7 +591,7 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Director: {
+          DirectorName: {
             caption: "directorName",
           },
         },
@@ -619,7 +621,7 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Sector: {
+          SectorType: {
             caption: "sectorType",
           },
         },
@@ -650,7 +652,7 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Industry: {
+          IndustryType: {
             caption: "industryType",
           },
         },
@@ -724,7 +726,7 @@ export default {
           Company: {
             caption: "ticker",
           },
-          Peratio: {
+          PeratioValue: {
             caption: "peratioValue",
           },
         },
@@ -754,7 +756,7 @@ export default {
             caption: "ticker",
           },
 
-          Peratio: {
+          PeratioValue: {
             caption: "peratioValue",
           },
         },
@@ -795,7 +797,7 @@ export default {
             caption: "ticker",
           },
 
-          Employee: {
+          EmployeeCount: {
             caption: "empCount",
           },
         },
@@ -825,7 +827,7 @@ export default {
             caption: "ticker",
           },
 
-          Employee: {
+          EmployeeCount: {
             caption: "empCount",
           },
         },
@@ -857,7 +859,7 @@ export default {
       var comp6 = compRe[5];
 
       var config = {
-        encrypted: "ENCRYPTION_ON",
+        //encrypted: "ENCRYPTION_ON",
         container_id: "viz",
         server_url: "neo4j://46243086.databases.neo4j.io:7687",
         server_user: "neo4j",

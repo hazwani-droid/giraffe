@@ -65,8 +65,8 @@
             :custom-filter="filterOnlyCapsText"
           >
             <template #[`item.source`]="{ value }">
-              <a target="_blank" :href="value">
-                {{ "source" }}
+              <a style="text-decoration: none" target="_blank" :href="value">
+                 <v-icon>mdi-link-box</v-icon> 
               </a>
             </template>
             <template v-slot:top>
