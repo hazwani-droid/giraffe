@@ -65,7 +65,7 @@
                 required
                 color="blue accent-3"
                 v-model="name"
-                :rules="stringRules"
+               
               ></v-text-field>
 
               <v-text-field
