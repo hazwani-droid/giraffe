@@ -1,10 +1,56 @@
+<!-- Use preprocessors via the lang attribute! e.g. <template lang="pug"> -->
 <template>
-  <v-row
-    class="d-flex justify-center align-center fill-height"
-    style="min-height: 100vh"
-  >
-    <v-col cols="12" md="6">
-      <v-card>
+  <v-container fluid>
+    <v-row>
+      <v-col >
+        <h2>Admin Profile</h2>
+        <hr class="my-4" />
+      </v-col>
+    </v-row>
+    <v-row align-h="center">
+      <v-col cols="6" md="2">
+        <v-img
+          thumbnail
+          rounded="circle"
+          src="https://firebasestorage.googleapis.com/v0/b/stockneo-f9c14.appspot.com/o/user.jpg?alt=media&token=eb517b68-944d-4a1c-8dfe-84b93c49d7ba"
+          alt="Image 1"
+        >
+        </v-img><br>
+        <v-spacer></v-spacer>
+        <a>Change Profile Picture</a>
+      </v-col>
+
+      <v-col cols="12" md="10">
+        <v-card>
+          <v-tabs color="blue accent-4">
+            <v-tab class="text-capitalize">User Profile</v-tab>
+            <v-tab class="text-capitalize">Add Company</v-tab>
+            <v-tab class="text-capitalize">Delete Company</v-tab>
+
+            <v-tab-item>
+              <v-card>
+                <v-list dense>
+                  <v-list-item-group color="primary">
+                    <v-list-item v-for="(item, i) in items" :key="i">
+                      <v-list-item-icon>
+                        <v-icon v-text="item.icon"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item.b"></v-list-item-title>
+                        <v-list-item-title
+                          v-text="item.text"
+                        ></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+                <v-btn class="text-capitalize ma-2" outlined >
+              Update Profile
+            </v-btn>
+              </v-card>
+            </v-tab-item>
+            <v-tab-item>
+              <v-card>
         <v-row>
           <v-spacer></v-spacer>
           <v-card-title class="justify-center"> New Company Form </v-card-title>
@@ -94,7 +140,7 @@
                 :rules="stringRules"
               ></v-text-field>
               <v-text-field
-                label="Price per Earning Ratio"
+                label="Price per Earning Ratio (Millions)"
                 color="blue accent-3"
                 v-model="peratio"
                 required
@@ -102,67 +148,9 @@
               ></v-text-field>
             </v-form>
 
-            <v-spacer></v-spacer>
-            <v-row>
-              <v-col>
-                <p>
-                  Update existing company?
-                  <v-btn
-                    class="text-none"
-                    color="blue darken-1"
-                    plain
-                    @click="dialog3 = true"
-                    @click.stop="updateRe"
-                    >Update</v-btn
-                  >
-                </p>
-              </v-col>
-            </v-row>
+            
             <v-dialog v-model="dialog3" max-width="400px">
-              <v-card>
-                <v-card-title class="justify-center">
-                  <p>Company Delete Form</p>
-                </v-card-title>
-                <v-card-text>
-                  <v-select
-                    label="Choose a company"
-                    v-model="update"
-                    :items="company"
-                    item-text="name"
-                    solo
-                  ></v-select>
-                </v-card-text>
-                <v-col>
-                  <div>
-                    <p>Confirm delete Company: {{ update }}?</p>
-                  </div>
-                </v-col>
-                <v-col class="text-right">
-                  <v-btn class="text-capitalize" @click.stop="deleteCom" plain
-                    >Delete
-                  </v-btn>
-                </v-col>
-                <v-snackbar
-                  v-model="hasdel"
-                  :timeout="2000"
-                  absolute
-                  bottom
-                  left
-                >
-                  Company {{ update }} has been deleted.
-                </v-snackbar>
-
-                <v-card-actions>
-                  <v-btn
-                    class="text-capitalize"
-                    color="primary"
-                    text
-                    @click="dialog3 = false"
-                  >
-                    Close
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
+              
             </v-dialog>
             <v-card-actions>
               <v-col class="text-right">
@@ -199,15 +187,65 @@
           </v-container>
         </v-card-text>
       </v-card>
-    </v-col>
-  </v-row>
-</template>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script>
-import neo4j from "neo4j-driver";
+            </v-tab-item>
+            <v-tab-item>
+              <v-card>
+                <v-card-title class="justify-center">
+                  <p>Company Delete Form</p>
+                </v-card-title>
+                <v-card-text>
+                  <v-select
+                    label="Choose a company"
+                    v-model="update"
+                    :items="company"
+                    item-text="name"
+                    solo
+                  ></v-select>
+                </v-card-text>
+                <v-col>
+                  <div>
+                    <p>Confirm delete Company: {{ update }}?</p>
+                  </div>
+                </v-col>
+                <v-col class="text-right">
+                  <v-btn class="text-capitalize" @click.stop="deleteCom" plain
+                    >Delete
+                  </v-btn>
+                </v-col>
+                <v-snackbar
+                  v-model="hasdel"
+                  :timeout="2000"
+                  absolute
+                  bottom
+                  left
+                >
+                  Company {{ update }} has been deleted.
+                </v-snackbar>
 
+             
+              </v-card>
+            </v-tab-item>
+          </v-tabs>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import neo4j from "neo4j-driver";
 export default {
   data: () => ({
+    
+      tab: null,
+      items: [
+        { b: "Name:  ", text: " John Herbert", icon: "mdi-account" },
+        { b: "Email:  ", text: " john_65@gmail.com", icon: "mdi-email" },
+        { b: "Job Title:  ", text: "Administrator", icon: "mdi-account-cog" },
+        { b: "Contact:  ", text: "016 - 6657865", icon: "mdi-phone" },
+        { b: "Address:  ", text: "A6, Taman Bintang, 11900 Bayan Gulai, Melaka", icon: "mdi-map-marker" },
+      ],
+      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     dialog2: false,
     dialog3: false,
 
@@ -259,6 +297,9 @@ export default {
     this.updateRe();
   },
   methods: {
+    deleteAccount() {
+      alert("Account Deleted");
+    },
     submitRegister() {
       var driver = neo4j.driver(
         "neo4j://46243086.databases.neo4j.io:7687",
@@ -365,6 +406,16 @@ export default {
       console.log("deleted");
     },
   },
+
 };
 </script>
- 
+
+<style>
+
+a:hover {
+  color: blue;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+</style>

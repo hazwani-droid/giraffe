@@ -70,7 +70,7 @@
               v-for="(item, i) in barItems"
               :key="i"
               :to="item.to"
-              class="text-capitalize"
+              class="text-capitalize btn"
               exact
               exact-active-class="accent--text"
               text
@@ -125,14 +125,20 @@ export default {
       },
       {
         title: "Graph Screener",
-        to: "/screener",
+        to: "/Screener",
       },
       
       {
-        title: "Update Company",
+        title: "Admin",
         to: "/Update",
       },
     ],
   }),
 };
 </script>
+
+<style scoped>
+.btn{
+  text-decoration: none;
+}
+</style>

@@ -224,9 +224,8 @@
                 </v-navigation-drawer>
 
                 <v-col class="text-right">
-                 
                   <v-btn dark class="text-capitalize" @click="downloadGraph">
-                     <v-icon>mdi-download</v-icon>
+                    <v-icon>mdi-download</v-icon>
                     Download graph as image
                   </v-btn>
                 </v-col>
@@ -240,7 +239,7 @@
                 <div id="viz" ref="printcontent">
                   <v-row>
                     <v-col cols="12">
-                      <div >
+                      <div>
                         <v-alert
                           class="font-italic text-center justify-left"
                           border="left"
@@ -705,7 +704,6 @@ export default {
       viz.render();
     },
     peratioRe() {
-      
       if (this.peratio == "Below 50 Million") {
         console.log(this.peratio);
         return this.peratioLessRee();
@@ -716,7 +714,6 @@ export default {
       }
     },
     peratioMoreRee() {
-      
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
@@ -746,7 +743,6 @@ export default {
       viz.render();
     },
     peratioLessRee() {
-       
       var config = {
         encrypted: "ENCRYPTION_ON",
         container_id: "viz",
