@@ -127,7 +127,7 @@
                               v-model="peratio"
                               :items="peratios"
                               v-on:change="peratioRe"
-                              label="Price to earning ratio"
+                              label="Price per earning ratio"
                               dense
                             ></v-select>
                           </v-col>
