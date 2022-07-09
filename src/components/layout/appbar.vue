@@ -130,7 +130,7 @@ export default {
       
       {
         title: "Admin",
-        to: "/Admin",
+        to: "/Update",
       },
     ],
   }),
