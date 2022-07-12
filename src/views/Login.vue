@@ -34,6 +34,7 @@
                             prepend-icon="mdi-account"
                             type="text"
                             color="blue accent-3"
+                            :rules="string2Rules"
                           />
 
                           <v-text-field
@@ -44,6 +45,7 @@
                             prepend-icon="mdi-lock"
                             type="password"
                             color="blue accent-3"
+                            :rules="password2Rules"
                           />
                         </v-form>
                         <h3 class="text-center mt-4">Forgot your password ?</h3>
@@ -185,6 +187,9 @@ export default {
       (v) => !!v || "This field is required",
       (v) => /^[A-Za-z- ]*$/i.test(v) || "Please exclude numbers",
     ],
+     string2Rules: [
+      (v) => !!v || "This field is required",
+    ],
     emailRules: [
       (v) => !!v || "E-mail field is required",
       (v) =>
@@ -192,10 +197,13 @@ export default {
         "E-mail field must be valid, e.g haz45@gmail.com",
     ],
     passwordRules: [
-      (v) => !!v || "E-mail field is required",
+      (v) => !!v || "Password field is required",
       (v) =>
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).*$/.test(v) ||
         "Password requires 1 of each of the following: uppercase letter, lowercase letter, number",
+    ],
+     password2Rules: [
+      (v) => !!v || "Password field is required"
     ],
   }),
   props: {
