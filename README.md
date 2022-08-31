@@ -1,6 +1,6 @@
 # HeroUI - Giraffe
 
-![images](images/preview.png)
+![images](https://firebasestorage.googleapis.com/v0/b/stockneo-f9c14.appspot.com/o/ss.png?alt=media&token=f9ecafbb-9c6b-43ba-9d2c-9cc2aff4047c)
 
 Giraffe is a complete application theme, Giraffe theme built with [Vuetify](https://vuetifyjs.com/) created
 by [HeroUI](https://heroui.net/). It is a solution that displays dense content, such as news, blogs or magazines,
