@@ -6,7 +6,7 @@ As we all know, investment decision making is a very complex process.Through glo
 
 ## About
 
-Project StockNeo is to create a stock screener that represents data in knowledge graph format utilizing neo4j graph database.
+Project StockNeo is to create a stock screener that represents data in knowledge graph format utilizing neo4j graph database. Further project decsription and website tour can be referred through this [StockNeo Youtube link](https://youtu.be/x-2OwVRYIeI). 
 
 ## Preview
 
