@@ -1,12 +1,12 @@
-# HeroUI - Giraffe
+# FYP - StockNeo
 
 ![images](https://firebasestorage.googleapis.com/v0/b/stockneo-f9c14.appspot.com/o/ss.png?alt=media&token=f9ecafbb-9c6b-43ba-9d2c-9cc2aff4047c)
 
-Giraffe is a complete application theme, Giraffe theme built with [Vuetify](https://vuetifyjs.com/) created
-by [HeroUI](https://heroui.net/). It is a solution that displays dense content, such as news, blogs or magazines,
-including news, authors, classified pages, and so on. Giraffe are characterized by a large number of components
-assembled together and look amazing. If you are a new company and want to create your online image, or if you just want
-people to know who you are and what you do, this may be your answer.
+As we all know, investment decision making is a very complex process.Through globalization, the world has become increasingly interconnected. Factors impacting fluctuation of stock prices. Process of data discovery brings a hard time for the stakeholders. Knowledge graphs apply semantics to give context and relationships to data, providing a framework for data integration, unification, analytics, and sharing. Neo4j Graph Database have enabled businesses to implement dozens of new use cases.
+
+## About
+
+Project StockNeo is to create a stock screener that represents data in knowledge graph format utilizing neo4j graph database.
 
 ## Preview
 
@@ -16,30 +16,15 @@ people to know who you are and what you do, this may be your answer.
 
 ### Basic Usage
 
-Clone the source files of the theme and navigate into the theme's root directory. Run `yarn` and then run `yarn dev`
-which will open up a preview of the template in your default browser, watch for changes to core template files, and live
-reload the browser when changes are saved. You can view the `package.json` file to see which scripts are included.
+Clone the source files and navigate to the main source file []().
 
-#### Scripts
-We have now switched to the Vite build tool, which is much faster.
+### Scripts
 
-- `yarn dev` start a vite dev server
-- `yarn build` build all file to `dist`
+- `npm install` install all the project packages and dependencies
+- `npm run dev` run the project script
+- `npm run build` build all file to `dist`
 
-## Bug & Issues
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/AGDholo/giraffe/issues).
-
-## About
-
-Giraffe is an open source library of free Vuetify themes and templates。All of the free themes and templates on HeroUI
-are released under the MIT license, which means you can use them for any purpose, even for commercial projects.
-
-- <https://heroui.net/>
-- <https://github.com/AGDholo>
-
-Giraffe based on the [Vuetify](https://vuetifyjs.com/) framework created
-by [stackFlam1ngo](https://twitter.com/stackFlam1ngo).
 
 ## Copyright and License
 
