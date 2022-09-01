@@ -16,7 +16,7 @@ Project StockNeo is to create a stock screener that represents data in knowledg
 
 ### Basic Usage
 
-Clone the source files and navigate to the main source file []().
+Clone the source files and navigate to the main source file.
 
 ### Scripts
 
@@ -24,8 +24,12 @@ Clone the source files and navigate to the main source file []().
 - `npm run dev` run the project script
 - `npm run build` build all file to `dist`
 
-### Neo4j database
+### Frond end framework
 
-The graph database used here is the [Neo4j Graph Database](https://neo4j.com/). Provide file is the [dump file]([neo4j.dump](https://github.com/hazwani-droid/stockneo/blob/c9f84e9ff56e221f94bf693ad5d0edb0ad5bedbe/neo4j.dump)) that contains the existing company datasets in the system.
+Vue.js is a progressive framework for JavaScript used to build web interfaces and one-page applications. Vite is a no bundler DEV  environment for Vue.Js. Vite serves project code via native ES Module imports during development, to develop Vue. js single file components without a bundle step.
+
+### Database
+
+The graph database used here is the [Neo4j Graph Database](https://neo4j.com/). Provided file is the [dump file]([neo4j.dump](https://github.com/hazwani-droid/stockneo/blob/c9f84e9ff56e221f94bf693ad5d0edb0ad5bedbe/neo4j.dump)) that contains the existing company datasets in the system.
 
 
