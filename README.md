@@ -24,17 +24,8 @@ Clone the source files and navigate to the main source file []().
 - `npm run dev` run the project script
 - `npm run build` build all file to `dist`
 
+### Neo4j database
 
-
-## Copyright and License
-
-Copyright 2022 HeroUI LLC. Code released under the [MIT](https://github.com/AGDholo/giraffe/blob/master/LICENSE)
-license.
-
-## Sponsor
-
-I accept all sponsorship, if you want to cooperate, please feel free to contact me.
-
-![WebStorm logo](https://resources.jetbrains.com/storage/products/company/brand/logos/WebStorm.png)
+The graph database used here is teh [Neo4j Graph Database](https://neo4j.com/). Provide file is the [dump file](https://neo4j.com/) that contains the existing company datasets in the system.
 
 
