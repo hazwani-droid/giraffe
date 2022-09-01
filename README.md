@@ -26,6 +26,6 @@ Clone the source files and navigate to the main source file []().
 
 ### Neo4j database
 
-The graph database used here is teh [Neo4j Graph Database](https://neo4j.com/). Provide file is the [dump file](https://neo4j.com/) that contains the existing company datasets in the system.
+The graph database used here is the [Neo4j Graph Database](https://neo4j.com/). Provide file is the [dump file]([neo4j.dump](https://github.com/hazwani-droid/stockneo/blob/c9f84e9ff56e221f94bf693ad5d0edb0ad5bedbe/neo4j.dump)) that contains the existing company datasets in the system.
 
 
